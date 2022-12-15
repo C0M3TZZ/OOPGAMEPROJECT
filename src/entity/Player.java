@@ -42,10 +42,11 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
         try {
-            animationLoader.LoadAnimation("player/walk/spriteSheet.png", 0, 1, "down");
-            animationLoader.LoadAnimation("player/walk/spriteSheet.png", 2, 3, "left");
-            animationLoader.LoadAnimation("player/walk/spriteSheet.png", 4, 5, "right");
-            animationLoader.LoadAnimation("player/walk/spriteSheet.png", 6, 7, "up");
+            animationLoader.LoadAnimation("player/player1/walk/spriteSheetTest.png", 0, 3, "down");
+            animationLoader.LoadAnimation("player/player1/walk/spriteSheetTest.png", 0, 3, "left");
+            animationLoader.LoadAnimation("player/player1/walk/spriteSheetTest.png", 0, 3, "right");
+            animationLoader.LoadAnimation("player/player1/walk/spriteSheetTest.png", 0, 3, "up");
+            animationLoader.LoadAnimation("player/player1/idle/spriteSheetTest.png", 0, 3, "idle");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,28 +70,28 @@ public class Player extends Entity {
         }
         if (keyH.rightPressed) {
             direction = "right";
+            flip = 0;
             if (!gp.cChecker.rightHit && !collisionOn){
                 worldX += speed;
             }
         }
         if (keyH.leftPressed) {
             direction = "left";
+            flip = 1;
             if (!gp.cChecker.leftHit && !collisionOn){
                 worldX -= speed;
             }
         }
 
-        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
-            spriteCounter++;
-            if (spriteCounter > 10){
-                if (spriteNum != animationLoader.getAnimation(direction).size() - 1){
-                    spriteNum++;
-                } else {
-                    spriteNum = 0;
-                }
-
-                spriteCounter = 0;
+        spriteCounter++;
+        if (spriteCounter > 10){
+            if (spriteNum != animationLoader.getAnimation(direction).size() - 1){
+                spriteNum++;
+            } else {
+                spriteNum = 0;
             }
+
+            spriteCounter = 0;
         }
 
     }
@@ -101,6 +102,6 @@ public class Player extends Entity {
         } catch (NullPointerException e) {
             System.err.println("ERR: Animation name '" + direction + "' not found");
         }
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX + (flip * gp.tileSize), screenY, gp.tileSize + ((-gp.tileSize * flip) * 2), gp.tileSize, null);
     }
 }
