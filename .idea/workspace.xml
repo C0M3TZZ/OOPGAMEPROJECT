@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="64009d68-03c4-4fd7-9ea0-37e80d46987a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/built-jar.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/.netbeans_automatic_build" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/.netbeans_update_resources" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/entity/Entity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/entity/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/CollisionChecker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/GamePanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/KeyHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/tile/Tile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/tile/TileManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifest.mf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/genfiles.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/maps/map01.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player1/idle/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player1/idle/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player1/idle/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player1/idle/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player1/run/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player1/run/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player1/run/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player1/run/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player2/idle/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player2/idle/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player2/idle/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player2/idle/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player2/run/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player2/run/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player2/run/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/player/player2/run/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/tiles/earth.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/tiles/grass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/tiles/sand.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/tiles/tree.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/tiles/wall.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/tiles/water.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/CollisionChecker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/GamePanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/KeyHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tile/Tile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tile/TileManager.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2IwvgfYmVa84UJqcugNB2md5MiE" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Documents/OOPGAMEPROJECT&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="64009d68-03c4-4fd7-9ea0-37e80d46987a" name="Changes" comment="" />
+      <created>1671105573362</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1671105573362</updated>
+      <workItem from="1671105575719" duration="37000" />
+      <workItem from="1671105631038" duration="156000" />
+      <workItem from="1671105827739" duration="18000" />
+      <workItem from="1671105926709" duration="28000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
