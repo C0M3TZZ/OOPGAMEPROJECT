@@ -37,7 +37,7 @@ public class Player extends Entity {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
         speed = 4;
-        direction = "down";
+        direction = "idle";
     }
 
     public void getPlayerImage() {
@@ -54,6 +54,7 @@ public class Player extends Entity {
     public void update() {
         collisionOn = false;
         gp.cChecker.checkTile(this);
+        direction = "idle";
         if (keyH.upPressed){
             direction = "up";
             if (!gp.cChecker.topHit && !collisionOn){
@@ -94,7 +95,12 @@ public class Player extends Entity {
 
     }
     public void draw(Graphics2D g2) {
-        BufferedImage image = animationLoader.getAnimation(direction).get(spriteNum);
+        BufferedImage image = null;
+        try {
+            image = animationLoader.getAnimation(direction).get(spriteNum);
+        } catch (NullPointerException e) {
+            System.err.println("ERR: Animation name '" + direction + "' not found");
+        }
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
 }
