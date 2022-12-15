@@ -23,9 +23,9 @@ public class Player extends Entity {
         this.keyH = keyH;
         this.animationLoader = new AnimationLoader(gp);
 
-        screenX = gp.screenWidth/2 - (gp.tileSize / 2);
+        screenX = (gp.screenWidth/2) - gp.tileSize;
 
-        screenY = gp.screenHeight/2 - (gp.tileSize / 2);
+        screenY = (gp.screenHeight/2) - gp.tileSize;
 
         solidArea = new Rectangle(54, 94, 22, 20);
 
