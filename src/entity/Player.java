@@ -27,7 +27,7 @@ public class Player extends Entity {
 
         solidArea = new Rectangle(8, 5, 32, 55);
 
-        hitBoxX = new Rectangle(4, 13, 40, 40);
+        hitBoxX = new Rectangle(4, 8, 40, 50);
 
         setDefaultValues();
         getPlayerImage();
