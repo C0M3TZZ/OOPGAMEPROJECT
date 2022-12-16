@@ -4,10 +4,8 @@ import main.AnimationLoader;
 import main.GamePanel;
 import main.KeyHandler;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class Player extends Entity {
     GamePanel gp;
@@ -27,7 +25,9 @@ public class Player extends Entity {
 
         screenY = gp.screenHeight/2 - (gp.tileSize / 2);
 
-        solidArea = new Rectangle(8, 16, 32, 32);
+        solidArea = new Rectangle(8, 5, 32, 55);
+
+        hitBoxX = new Rectangle(4, 13, 40, 40);
 
         setDefaultValues();
         getPlayerImage();
@@ -53,32 +53,32 @@ public class Player extends Entity {
     }
 
     public void update() {
-        collisionOn = false;
+//        gp.cChecker.checkTile(this);
         gp.cChecker.checkTile(this);
         direction = "idle";
         if (keyH.upPressed){
             direction = "up";
-            if (!gp.cChecker.topHit && !collisionOn){
+            if (!topHit){
                 worldY -= speed;
             }
         }
         if (keyH.downPressed) {
             direction = "down";
-            if (!gp.cChecker.bottomHit && !collisionOn){
+            if (!bottomHit){
                 worldY += speed;
             }
         }
         if (keyH.rightPressed) {
             direction = "right";
             flip = 0;
-            if (!gp.cChecker.rightHit && !collisionOn){
+            if (!rightHit){
                 worldX += speed;
             }
         }
         if (keyH.leftPressed) {
             direction = "left";
             flip = 1;
-            if (!gp.cChecker.leftHit && !collisionOn){
+            if (!leftHit){
                 worldX -= speed;
             }
         }
@@ -103,5 +103,9 @@ public class Player extends Entity {
             System.err.println("ERR: Animation name '" + direction + "' not found");
         }
         g2.drawImage(image, screenX + (flip * gp.tileSize), screenY, gp.tileSize + ((-gp.tileSize * flip) * 2), gp.tileSize, null);
+        g2.setColor(Color.RED);
+        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+        g2.setColor(Color.GREEN);
+        g2.drawRect(screenX + hitBoxX.x, screenY + hitBoxX.y, hitBoxX.width, hitBoxX.height);
     }
 }

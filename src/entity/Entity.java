@@ -8,13 +8,18 @@ public class Entity {
     public int worldY;
     public int speed;
 
-    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public String direction;
 
-    public int flip = 0;
+    public int flip = 1;
 
     public int spriteCounter = 0;
     public int spriteNum = 0;
     public Rectangle solidArea;
-    public boolean collisionOn = true;
+
+    public Rectangle hitBoxX;
+
+    public boolean topHit = false;
+    public boolean bottomHit = false;
+    public boolean leftHit = false;
+    public boolean rightHit = false;
 }
