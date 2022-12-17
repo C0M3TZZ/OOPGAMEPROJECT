@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
-    GamePanel gp;
     KeyHandler keyH;
     BigSword bigSword;
     public final int screenX;
@@ -18,10 +17,10 @@ public class Player extends Entity {
     public boolean dashing;
 
     public Player(GamePanel gp, KeyHandler keyH) {
-        this.gp = gp;
+        super(gp);
         this.keyH = keyH;
         this.animationLoader = new AnimationLoader(gp);
-        bigSword = new BigSword(gp, keyH, this);
+        bigSword = new BigSword(gp, keyH);
 
         screenX = (gp.screenWidth / 2) - gp.tileSize;
 
@@ -58,7 +57,6 @@ public class Player extends Entity {
     }
 
     public void update() {
-        collisionOn = false;
         gp.cChecker.checkTile(this);
 
         // RUN

@@ -10,11 +10,9 @@ import java.awt.*;
 public abstract class Weapon {
     GamePanel gp;
     KeyHandler keyH;
-    Player player;
     AnimationLoader animationLoader;
     public int damage;
-    public int spriteCounter = 0;
-    public int spriteNum = 0;
+    public int spriteCounter, spriteNum;
 
     public void setDamage() {
         this.damage = damage;

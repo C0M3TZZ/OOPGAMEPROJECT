@@ -9,10 +9,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class BigSword extends Weapon {
-    public BigSword(GamePanel gp, KeyHandler keyH, Player player) {
+    public BigSword(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
-        this.player = player;
         this.animationLoader = new AnimationLoader(gp);
 
         getWeaponImage();
@@ -37,11 +36,11 @@ public class BigSword extends Weapon {
 
     @Override
     public void draw(Graphics2D g2) {
-        BufferedImage image = animationLoader.getAnimation(player.direction).get(player.spriteNum);
-        if (player.direction.equals("left") || player.direction.equals("dashLeft")) {
-            g2.drawImage(image, player.screenX + (gp.tileSize * 2), player.screenY, -gp.tileSize * 2, gp.tileSize * 2, null);
+        BufferedImage image = animationLoader.getAnimation(gp.player.direction).get(gp.player.spriteNum);
+        if (gp.player.direction.equals("left") || gp.player.direction.equals("dashLeft")) {
+            g2.drawImage(image, gp.player.screenX + (gp.tileSize * 2), gp.player.screenY, -gp.tileSize * 2, gp.tileSize * 2, null);
         } else {
-            g2.drawImage(image, player.screenX, player.screenY, gp.tileSize * 2, gp.tileSize * 2, null);
+            g2.drawImage(image, gp.player.screenX, gp.player.screenY, gp.tileSize * 2, gp.tileSize * 2, null);
         }
     }
 }

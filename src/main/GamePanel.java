@@ -1,13 +1,13 @@
 package main;
 
+import entity.Entity;
 import entity.Player;
 import tile.TileManager;
-import weapon.BigSword;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JPanel implements Runnable{
+public class GamePanel extends JPanel implements Runnable {
     public final int originalTileSize = 16;
     final int scale = 4;
 
@@ -27,15 +27,22 @@ public class GamePanel extends JPanel implements Runnable{
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
-    public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyH);
-    public GamePanel () {
+    public Entity monster[] = new Entity[10];
+    public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter assetSetter = new AssetSetter(this);
+
+    public GamePanel() {
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+    }
+
+    public void setUpGame() {
+        assetSetter.setMonster();
     }
 
     public void startGameThread() {
@@ -46,7 +53,7 @@ public class GamePanel extends JPanel implements Runnable{
     @Override
     public void run() {
 
-        double drawInterval = 1000000000/FPS;
+        double drawInterval = 1000000000 / FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -65,16 +72,29 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
     }
+
     public void update() {
 
         player.update();
+        for (int i = 0; i < monster.length; i++) {
+            if (monster[i] != null) {
+                monster[i].update();
+            }
+        }
 
     }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
         tileM.draw(g2);
+
+        for (int i = 0; i < monster.length; i++) {
+            if (monster[i] != null) {
+                monster[i].draw(g2);
+            }
+        }
 
         player.draw(g2);
 
