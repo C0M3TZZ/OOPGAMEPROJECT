@@ -91,6 +91,7 @@ public class Player extends Entity {
         }
 
         // DASH
+        gp.cChecker.checkTile(this);
         if (keyH.shiftPressed && direction != "idle") {
             if (dashingCounter == 0) {
                 spriteNum = 0;
