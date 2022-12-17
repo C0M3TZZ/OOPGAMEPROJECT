@@ -79,8 +79,8 @@ public class TileManager {
 
             int tileNum = mapTileNum[worldCol][worldRow];
 
-            int worldX = worldCol * gp.tileSize;
-            int worldY = worldRow * gp.tileSize;
+            int worldX = worldCol * gp.tileSize * 2;
+            int worldY = worldRow * gp.tileSize * 2;
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
@@ -88,7 +88,7 @@ public class TileManager {
 //                    worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
 //                    worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
 //                    worldY - gp.tileSize < gp.player.worldY + gp.player.screenY ){
-            g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize*2, gp.tileSize*2, null);
 //            }
             worldCol++;
 
