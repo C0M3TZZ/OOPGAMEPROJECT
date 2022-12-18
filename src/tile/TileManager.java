@@ -11,6 +11,7 @@ public class TileManager {
     GamePanel gp;
     public Tile[] tile;
     public int mapTileNum[][];
+
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
@@ -25,11 +26,11 @@ public class TileManager {
         try {
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            for (int i = 0; i < 65; i++) {
+            for (int i = 0; i < 77; i++) {
                 String line = br.readLine();
                 String data[] = line.split(" ");
                 tile[i] = new Tile();
-                tile[i].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/"+data[0]));
+                tile[i].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/" + data[0]));
                 tile[i].collision = Boolean.parseBoolean(data[1]);
             }
             br.close();
@@ -79,8 +80,8 @@ public class TileManager {
 
             int tileNum = mapTileNum[worldCol][worldRow];
 
-            int worldX = worldCol * gp.tileSize * 2;
-            int worldY = worldRow * gp.tileSize * 2;
+            int worldX = worldCol * gp.tileSize;
+            int worldY = worldRow * gp.tileSize;
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
@@ -88,7 +89,7 @@ public class TileManager {
 //                    worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
 //                    worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
 //                    worldY - gp.tileSize < gp.player.worldY + gp.player.screenY ){
-            g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize*2, gp.tileSize*2, null);
+            g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 //            }
             worldCol++;
 
