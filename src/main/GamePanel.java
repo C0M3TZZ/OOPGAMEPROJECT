@@ -1,8 +1,7 @@
 package main;
 
 import entity.Entity;
-import entity.Player;
-import entity.Player1;
+import entity.DogBoy;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -28,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
-    public Player1 player = new Player1(this, keyH);
+    public DogBoy player = new DogBoy(this, keyH);
     public Entity monster[] = new Entity[10];
     public CollisionChecker cChecker = new CollisionChecker(this);
 
