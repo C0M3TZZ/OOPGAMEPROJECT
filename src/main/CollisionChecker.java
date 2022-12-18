@@ -57,4 +57,133 @@ public class CollisionChecker {
             entity.rightHit = false;
         }
     }
+
+    public int checkObject(Entity entity, boolean player){
+        int index = -1;
+
+        for (int i = 0; i < gp.obj.length; i++) {
+            if (gp.obj[i] != null) {
+                entity.solidAreaX.x = entity.worldX + entity.solidAreaX.x;
+                entity.solidAreaX.y = entity.worldY + entity.solidAreaX.y;
+
+                entity.solidAreaY.x = entity.worldX + entity.solidAreaY.x;
+                entity.solidAreaY.y = entity.worldY + entity.solidAreaY.y;
+
+                gp.obj[i].solidArea.x = gp.obj[i].worldX + gp.obj[i].solidArea.x;
+                gp.obj[i].solidArea.y = gp.obj[i].worldY + gp.obj[i].solidArea.y;
+
+                if (entity.direction.equals("up")) {
+                    entity.solidAreaX.y -= entity.speed;
+                    entity.solidAreaY.y -= entity.speed;
+                    if (entity.solidAreaX.intersects(gp.obj[i].solidArea) || entity.solidAreaY.intersects(gp.obj[i].solidArea)) {
+                        if (gp.obj[i].collision) {
+                            entity.topHit = true;
+                        }
+                        if (player) {
+                            index = i;
+                        }
+                    }
+                }
+
+                if (entity.direction.equals("down")) {
+                    entity.solidAreaX.y += entity.speed;
+                    entity.solidAreaY.y += entity.speed;
+                    if (entity.solidAreaX.intersects(gp.obj[i].solidArea) || entity.solidAreaY.intersects(gp.obj[i].solidArea)) {
+                        if (gp.obj[i].collision) {
+                            entity.bottomHit = true;
+                        }
+                        if (player) {
+                            index = i;
+                        }
+                    }
+                }
+
+                if (entity.direction.equals("left")) {
+                    entity.solidAreaX.x -= entity.speed;
+                    entity.solidAreaY.x -= entity.speed;
+                    if (entity.solidAreaX.intersects(gp.obj[i].solidArea) || entity.solidAreaY.intersects(gp.obj[i].solidArea)) {
+                        if (gp.obj[i].collision) {
+                            entity.leftHit = true;
+                        }
+                        if (player) {
+                            index = i;
+                        }
+                    }
+                }
+
+                if (entity.direction.equals("right")) {
+                    entity.solidAreaX.x += entity.speed;
+                    entity.solidAreaY.x += entity.speed;
+                    if (entity.solidAreaX.intersects(gp.obj[i].solidArea) || entity.solidAreaY.intersects(gp.obj[i].solidArea)) {
+                        if (gp.obj[i].collision) {
+                            entity.rightHit = true;
+                        }
+                        if (player) {
+                            index = i;
+                        }
+                    }
+                }
+
+//                switch (entity.direction) {
+//                    case "up":
+//                        entity.solidAreaX.y -= entity.speed;
+//                        entity.solidAreaY.y -= entity.speed;
+//                        if (entity.solidAreaX.intersects(gp.obj[i].solidArea) || entity.solidAreaY.intersects(gp.obj[i].solidArea)) {
+//                            if (gp.obj[i].collision) {
+//                                entity.topHit = true;
+//                            }
+//                            if (player) {
+//                                index = i;
+//                            }
+//                        }
+//                        break;
+//                    case "down":
+//                        entity.solidAreaX.y += entity.speed;
+//                        entity.solidAreaY.y += entity.speed;
+//                        if (entity.solidAreaX.intersects(gp.obj[i].solidArea) || entity.solidAreaY.intersects(gp.obj[i].solidArea)) {
+//                            if (gp.obj[i].collision) {
+//                                entity.bottomHit = true;
+//                            }
+//                            if (player) {
+//                                index = i;
+//                            }
+//                        }
+//                        break;
+//                    case "left":
+//                        entity.solidAreaX.x -= entity.speed;
+//                        entity.solidAreaY.x -= entity.speed;
+//                        if (entity.solidAreaX.intersects(gp.obj[i].solidArea) || entity.solidAreaY.intersects(gp.obj[i].solidArea)) {
+//                            if (gp.obj[i].collision) {
+//                                entity.leftHit = true;
+//                            }
+//                            if (player) {
+//                                index = i;
+//                            }
+//                        }
+//                        break;
+//                    case "right":
+//                        entity.solidAreaX.x += entity.speed;
+//                        entity.solidAreaY.x += entity.speed;
+//                        if (entity.solidAreaX.intersects(gp.obj[i].solidArea) || entity.solidAreaY.intersects(gp.obj[i].solidArea)) {
+//                            if (gp.obj[i].collision) {
+//                                entity.rightHit = true;
+//                            }
+//                            if (player) {
+//                                index = i;
+//                            }
+//                        }
+//                        break;
+//                }
+                entity.solidAreaX.x = entity.solidAreaXDefaultX;
+                entity.solidAreaX.y = entity.solidAreaXDefaultY;
+                entity.solidAreaY.x = entity.solidAreaYDefaultX;
+                entity.solidAreaY.y = entity.solidAreaYDefaultY;
+                gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;
+                gp.obj[i].solidArea.y = gp.obj[i].solidAreaDefaultY;
+            }
+
+        }
+
+        return index;
+    }
 }

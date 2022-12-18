@@ -27,7 +27,14 @@ public class Player extends Entity {
         screenY = (gp.screenHeight / 2) - gp.tileSize;
 
         solidAreaX = new Rectangle(4 + 32 + 4 + 4, 8 + 56 + 28, 40, 50 - 28);
+
+        solidAreaXDefaultX = solidAreaX.x;
+        solidAreaXDefaultY = solidAreaX.y;
+
         solidAreaY = new Rectangle(8 + 32 + 4 + 4, 5 + 56 + 28, 32, 55 - 28);
+
+        solidAreaYDefaultX = solidAreaY.x;
+        solidAreaYDefaultY = solidAreaY.y;
 
         setDefaultValues();
         getPlayerImage();
@@ -56,8 +63,29 @@ public class Player extends Entity {
         }
     }
 
+    public void touchObject(int index) {
+        if (index != -1) {
+            if (gp.obj[index].pickUpable) {
+                pickUpItem(index);
+            } else {
+                gp.obj[index].action();
+                System.out.println("You can't pick up this item");
+            }
+        }
+    }
+
+    public void pickUpItem(int index) {
+        if (index != -1) {
+            gp.obj[index].action();
+            gp.obj[index] = null;
+        }
+    }
+
     public void update() {
         gp.cChecker.checkTile(this);
+        int objectIndex = gp.cChecker.checkObject(this, true);
+
+        touchObject(objectIndex);
 
         // RUN
         if (keyH.upPressed) {

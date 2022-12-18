@@ -11,6 +11,8 @@ public class Entity {
     public String direction = "left";
     public int spriteCounter, spriteNum;
     public Rectangle solidAreaX, solidAreaY;
+    public int solidAreaXDefaultX, solidAreaXDefaultY;
+    public int solidAreaYDefaultX, solidAreaYDefaultY;
     public boolean topHit, bottomHit, leftHit, rightHit;
     public int screenX, screenY;
     GamePanel gp;

@@ -4,11 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16aff991-6ba1-43d5-be88-4d4ecbe2c8f6" name="Changes" comment="" />
+    <list default="true" id="16aff991-6ba1-43d5-be88-4d4ecbe2c8f6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/entity/Entity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/entity/Entity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/entity/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/entity/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/main/CollisionChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/main/CollisionChecker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/main/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/main/GamePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AssetSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AssetSetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/CollisionChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GamePanel.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -17,6 +35,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2IwwRzLWjHa706kC7wVdEYdz78q" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
