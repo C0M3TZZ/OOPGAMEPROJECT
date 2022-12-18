@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.Player;
+import entity.Player1;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -27,10 +28,9 @@ public class GamePanel extends JPanel implements Runnable {
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
-    public Player player = new Player(this, keyH);
+    public Player1 player = new Player1(this, keyH);
     public Entity monster[] = new Entity[10];
     public CollisionChecker cChecker = new CollisionChecker(this);
-    public AssetSetter assetSetter = new AssetSetter(this);
 
     public GamePanel() {
 
@@ -39,10 +39,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-    }
-
-    public void setUpGame() {
-        assetSetter.setMonster();
     }
 
     public void startGameThread() {
@@ -76,11 +72,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
 
         player.update();
-        for (int i = 0; i < monster.length; i++) {
-            if (monster[i] != null) {
-                monster[i].update();
-            }
-        }
 
     }
 
@@ -89,13 +80,6 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
 
         tileM.draw(g2);
-
-        for (int i = 0; i < monster.length; i++) {
-            if (monster[i] != null) {
-                monster[i].draw(g2);
-            }
-        }
-
         player.draw(g2);
 
         g2.dispose();
