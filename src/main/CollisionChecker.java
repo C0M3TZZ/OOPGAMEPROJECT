@@ -5,22 +5,20 @@ import entity.Entity;
 public class CollisionChecker {
     GamePanel gp;
 
-
-
     public CollisionChecker(GamePanel gp) {
         this.gp = gp;
     }
 
     public void checkTile(Entity entity) {
-        int hitXLeft = (entity.worldX + entity.hitBoxX.x) / gp.tileSize;
-        int hitXRight = (entity.worldX + entity.hitBoxX.x + entity.hitBoxX.width) / gp.tileSize;
-        int hitXTop = (entity.worldY + entity.hitBoxX.y) / gp.tileSize;
-        int hitXBottom = (entity.worldY + entity.hitBoxX.y + entity.hitBoxX.height) / gp.tileSize;
+        int hitXLeft = (entity.worldX + entity.solidAreaX.x) / (gp.tileSize*2);
+        int hitXRight = (entity.worldX + entity.solidAreaX.x + entity.solidAreaX.width) / (gp.tileSize*2);
+        int hitXTop = (entity.worldY + entity.solidAreaX.y) / (gp.tileSize*2);
+        int hitXBottom = (entity.worldY + entity.solidAreaX.y + entity.solidAreaX.height) / (gp.tileSize*2);
 
-        int hitYLeft = (entity.worldX + entity.solidArea.x) / gp.tileSize;
-        int hitYRight = (entity.worldX + entity.solidArea.x + entity.solidArea.width) / gp.tileSize;
-        int hitYTop = (entity.worldY + entity.solidArea.y) / gp.tileSize;
-        int hitYBottom = (entity.worldY + entity.solidArea.y + entity.solidArea.height) / gp.tileSize;
+        int hitYLeft = (entity.worldX + entity.solidAreaY.x) / (gp.tileSize*2);
+        int hitYRight = (entity.worldX + entity.solidAreaY.x + entity.solidAreaY.width) / (gp.tileSize*2);
+        int hitYTop = (entity.worldY + entity.solidAreaY.y) / (gp.tileSize*2);
+        int hitYBottom = (entity.worldY + entity.solidAreaY.y + entity.solidAreaY.height) / (gp.tileSize*2);
 
         int topHitPos1 = gp.tileM.mapTileNum[hitYLeft][hitYTop];
         int topHitPos2 = gp.tileM.mapTileNum[hitYRight][hitYTop];

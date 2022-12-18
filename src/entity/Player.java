@@ -3,31 +3,31 @@ package entity;
 import main.AnimationLoader;
 import main.GamePanel;
 import main.KeyHandler;
+import weapon.BigSword;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
-    GamePanel gp;
     KeyHandler keyH;
-
-    AnimationLoader animationLoader;
-
+    BigSword bigSword;
     public final int screenX;
     public final int screenY;
+    public int dashingCounter;
+    public boolean dashing;
 
-    public Player(GamePanel gp, KeyHandler keyH){
-        this.gp = gp;
+    public Player(GamePanel gp, KeyHandler keyH) {
+        super(gp);
         this.keyH = keyH;
         this.animationLoader = new AnimationLoader(gp);
+        bigSword = new BigSword(gp, keyH);
 
-        screenX = gp.screenWidth/2 - (gp.tileSize / 2);
+        screenX = (gp.screenWidth / 2) - gp.tileSize;
 
-        screenY = gp.screenHeight/2 - (gp.tileSize / 2);
+        screenY = (gp.screenHeight / 2) - gp.tileSize;
 
-        solidArea = new Rectangle(8, 5, 32, 55);
-
-        hitBoxX = new Rectangle(4, 8, 40, 50);
+        solidAreaX = new Rectangle(4 + 32 + 4 + 4, 8 + 56 + 28, 40, 50 - 28);
+        solidAreaY = new Rectangle(8 + 32 + 4 + 4, 5 + 56 + 28, 32, 55 - 28);
 
         setDefaultValues();
         getPlayerImage();
@@ -42,50 +42,102 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
         try {
-            animationLoader.LoadAnimation("player/player1/walk/spriteSheetTest.png", 0, 3, "down");
-            animationLoader.LoadAnimation("player/player1/walk/spriteSheetTest.png", 0, 3, "left");
-            animationLoader.LoadAnimation("player/player1/walk/spriteSheetTest.png", 0, 3, "right");
-            animationLoader.LoadAnimation("player/player1/walk/spriteSheetTest.png", 0, 3, "up");
-            animationLoader.LoadAnimation("player/player1/idle/spriteSheetTest.png", 0, 3, "idle");
+            animationLoader.LoadAnimation("player/player1.png", 0, 3, "up");
+            animationLoader.LoadAnimation("player/player1.png", 4, 7, "left");
+            animationLoader.LoadAnimation("player/player1.png", 4, 7, "right");
+            animationLoader.LoadAnimation("player/player1.png", 8, 11, "down");
+            animationLoader.LoadAnimation("player/player1.png", 12, 15, "idle");
+            animationLoader.LoadAnimation("player/player1.png", 16, 19, "dashUp");
+            animationLoader.LoadAnimation("player/player1.png", 20, 23, "dashLeft");
+            animationLoader.LoadAnimation("player/player1.png", 20, 23, "dashRight");
+            animationLoader.LoadAnimation("player/player1.png", 24, 27, "dashDown");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void update() {
-//        gp.cChecker.checkTile(this);
         gp.cChecker.checkTile(this);
-        direction = "idle";
-        if (keyH.upPressed){
+
+        // RUN
+        if (keyH.upPressed) {
             direction = "up";
-            if (!topHit){
+            if (!topHit) {
                 worldY -= speed;
             }
         }
         if (keyH.downPressed) {
             direction = "down";
-            if (!bottomHit){
+            if (!bottomHit) {
                 worldY += speed;
             }
         }
         if (keyH.rightPressed) {
             direction = "right";
-            flip = 0;
-            if (!rightHit){
+            if (!rightHit) {
                 worldX += speed;
             }
         }
         if (keyH.leftPressed) {
             direction = "left";
-            flip = 1;
-            if (!leftHit){
+            if (!leftHit) {
                 worldX -= speed;
             }
         }
+        if (!keyH.upPressed && !keyH.downPressed && !keyH.leftPressed && !keyH.rightPressed) {
+            direction = "idle";
+        }
 
+        // DASH
+        gp.cChecker.checkTile(this);
+        if (keyH.shiftPressed && direction != "idle") {
+            if (dashingCounter == 0) {
+                spriteNum = 0;
+            }
+            dashingCounter++;
+            dashing = true;
+        }
+        if (dashingCounter > 0 && dashingCounter <= 20) {
+            switch (direction) {
+                case "up":
+                    direction = "dashUp";
+                    if (!topHit) {
+                        worldY -= speed;
+                    }
+                    break;
+                case "down":
+                    direction = "dashDown";
+                    if (!bottomHit) {
+                        worldY += speed;
+                    }
+                    break;
+                case "left":
+                    direction = "dashLeft";
+                    if (!leftHit) {
+                        worldX -= speed;
+                    }
+                    break;
+                case "right":
+                    direction = "dashRight";
+                    if (!rightHit) {
+                        worldX += speed;
+                    }
+                    break;
+            }
+        }
+        if (!keyH.shiftPressed) {
+            if (dashingCounter < 20 && dashing) {
+                dashingCounter++;
+            } else {
+                dashingCounter = 0;
+                dashing = false;
+            }
+        }
+
+        // update animation
         spriteCounter++;
-        if (spriteCounter > 10){
-            if (spriteNum != animationLoader.getAnimation(direction).size() - 1){
+        if (spriteCounter > 10) {
+            if (spriteNum != animationLoader.getAnimation(direction).size() - 1) {
                 spriteNum++;
             } else {
                 spriteNum = 0;
@@ -93,19 +145,20 @@ public class Player extends Entity {
 
             spriteCounter = 0;
         }
-
     }
+
     public void draw(Graphics2D g2) {
-        BufferedImage image = null;
-        try {
-            image = animationLoader.getAnimation(direction).get(spriteNum);
-        } catch (NullPointerException e) {
-            System.err.println("ERR: Animation name '" + direction + "' not found");
+        BufferedImage image = animationLoader.getAnimation(direction).get(spriteNum);
+        if (direction.equals("left") || direction.equals("dashLeft")) {
+            g2.drawImage(image, screenX + (gp.tileSize * 2), screenY, -gp.tileSize * 2, gp.tileSize * 2, null);
+        } else {
+            g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
         }
-        g2.drawImage(image, screenX + (flip * gp.tileSize), screenY, gp.tileSize + ((-gp.tileSize * flip) * 2), gp.tileSize, null);
+        bigSword.draw(g2);
+
         g2.setColor(Color.RED);
-        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+        g2.draw(new Rectangle(screenX + solidAreaY.x, screenY + solidAreaY.y, solidAreaY.width, solidAreaY.height));
         g2.setColor(Color.GREEN);
-        g2.drawRect(screenX + hitBoxX.x, screenY + hitBoxX.y, hitBoxX.width, hitBoxX.height);
+        g2.draw(new Rectangle(screenX + solidAreaX.x, screenY + solidAreaX.y, solidAreaX.width, solidAreaX.height));
     }
 }

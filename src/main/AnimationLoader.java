@@ -23,7 +23,7 @@ public class AnimationLoader {
             System.out.println("Loading animation: " + name + " from " + path);
             BufferedImage spriteSheet = ImageIO.read(getClass().getClassLoader().getResourceAsStream(path));
             for (int i = start; i <= end; i++) {
-                BufferedImage image = spriteSheet.getSubimage(i * gp.originalTileSize, 0, gp.originalTileSize, gp.originalTileSize);
+                BufferedImage image = spriteSheet.getSubimage(i * gp.tileSize, 0, gp.tileSize, gp.tileSize);
                 if (animationMap.containsKey(name)) {
                     animationMap.get(name).add(image);
                 } else {
