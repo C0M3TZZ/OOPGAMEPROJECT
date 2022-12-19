@@ -3,6 +3,7 @@ package entity;
 import main.AnimationLoader;
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_SwordAtk;
 import weapon.BigSword;
 
 import java.awt.*;
@@ -15,6 +16,7 @@ public class Player extends Entity {
     public final int screenY;
     public int dashingCounter;
     public boolean dashing;
+    public Projectile projectile;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -45,6 +47,8 @@ public class Player extends Entity {
         worldY = gp.tileSize * 21;
         speed = 4;
         direction = "idle";
+
+        projectile = new OBJ_SwordAtk(gp);
     }
 
     public void getPlayerImage() {
@@ -160,6 +164,13 @@ public class Player extends Entity {
                 dashingCounter = 0;
                 dashing = false;
             }
+        }
+
+        if (keyH.shotKeyPressed == true && !projectile.alive) {
+            projectile.set(worldX, worldY, direction, true, this);
+
+            gp.projectileList.add(projectile);
+            System.out.println("shot");
         }
 
         // update animation

@@ -7,6 +7,7 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
     public final int originalTileSize = 8;
@@ -33,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public SuperObject obj[] = new SuperObject[10];
     public Entity monster[] = new Entity[10];
+    public ArrayList<Entity> projectileList = new ArrayList<>();
 
     public GamePanel() {
 
@@ -85,6 +87,17 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
+        for (int i = 0; i < projectileList.size(); i++) {
+            if (projectileList.get(i) != null) {
+                if (projectileList.get(i).alive) {
+                    projectileList.get(i).update();
+                }
+                if (!projectileList.get(i).alive) {
+                    projectileList.remove(i);
+                }
+            }
+        }
+
     }
 
     public void paintComponent(Graphics g) {
@@ -102,6 +115,12 @@ public class GamePanel extends JPanel implements Runnable {
         for (int i = 0; i < monster.length; i++) {
             if (monster[i] != null) {
                 monster[i].draw(g2);
+            }
+        }
+
+        for (int i = 0; i < projectileList.size(); i++) {
+            if (projectileList.get(i) != null) {
+                projectileList.get(i).draw(g2);
             }
         }
 

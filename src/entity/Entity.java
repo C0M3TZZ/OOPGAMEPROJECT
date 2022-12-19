@@ -16,7 +16,11 @@ public class Entity {
     public boolean topHit, bottomHit, leftHit, rightHit;
     public int screenX, screenY;
     GamePanel gp;
-    AnimationLoader animationLoader;
+    public AnimationLoader animationLoader;
+
+    public boolean alive = true;
+    public int life = 0;
+    public int maxLife = 0;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -32,6 +36,7 @@ public class Entity {
         spriteCounter++;
         if (spriteCounter > 10) {
             if (spriteNum != animationLoader.getAnimation(direction).size() - 1) {
+                System.out.println("SpriteNum: " + spriteNum);
                 spriteNum++;
             } else {
                 spriteNum = 0;
@@ -45,17 +50,14 @@ public class Entity {
         BufferedImage image = animationLoader.getAnimation(this.direction).get(this.spriteNum);
         this.screenX = worldX - gp.player.worldX + gp.player.screenX;
         this.screenY = worldY - gp.player.worldY + gp.player.screenY;
-        switch (this.direction) {
-            case "right":
-                g2.drawImage(image, screenX + gp.tileSize * 2, screenY, -gp.tileSize * 2, gp.tileSize * 2, null);
-                break;
-            case "left":
-                g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
-                break;
+        if (direction.equals("left")) {
+            g2.drawImage(image, screenX + (gp.tileSize * 2), screenY, -gp.tileSize * 2, gp.tileSize * 2, null);
+        } else {
+            g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
         }
-        g2.setColor(Color.RED);
-        g2.draw(new Rectangle(this.screenX + this.solidAreaX.x, this.screenY + this.solidAreaX.y, this.solidAreaX.width, this.solidAreaX.height));
-        g2.setColor(Color.GREEN);
-        g2.draw(new Rectangle(this.screenX + this.solidAreaY.x, this.screenY + this.solidAreaY.y, this.solidAreaY.width, this.solidAreaY.height));
+//        g2.setColor(Color.RED);
+//        g2.draw(new Rectangle(this.screenX + this.solidAreaX.x, this.screenY + this.solidAreaX.y, this.solidAreaX.width, this.solidAreaX.height));
+//        g2.setColor(Color.GREEN);
+//        g2.draw(new Rectangle(this.screenX + this.solidAreaY.x, this.screenY + this.solidAreaY.y, this.solidAreaY.width, this.solidAreaY.height));
     }
 }
