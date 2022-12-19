@@ -36,7 +36,6 @@ public class Entity {
         spriteCounter++;
         if (spriteCounter > 10) {
             if (spriteNum != animationLoader.getAnimation(direction).size() - 1) {
-                System.out.println("SpriteNum: " + spriteNum);
                 spriteNum++;
             } else {
                 spriteNum = 0;

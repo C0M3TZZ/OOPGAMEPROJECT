@@ -28,10 +28,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
+    MouseHandler mouseH = new MouseHandler(this);
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
-    public Player player = new Player(this, keyH);
+    public Player player = new Player(this, keyH, mouseH);
     public SuperObject obj[] = new SuperObject[10];
     public Entity monster[] = new Entity[10];
     public ArrayList<Entity> projectileList = new ArrayList<>();
@@ -42,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
+        this.addMouseListener(mouseH);
         this.setFocusable(true);
     }
 

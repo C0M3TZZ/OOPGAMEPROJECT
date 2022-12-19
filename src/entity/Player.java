@@ -3,6 +3,7 @@ package entity;
 import main.AnimationLoader;
 import main.GamePanel;
 import main.KeyHandler;
+import main.MouseHandler;
 import object.OBJ_SwordAtk;
 import weapon.BigSword;
 
@@ -11,6 +12,8 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
     KeyHandler keyH;
+
+    MouseHandler mouseH;
     BigSword bigSword;
     public final int screenX;
     public final int screenY;
@@ -18,9 +21,10 @@ public class Player extends Entity {
     public boolean dashing;
     public Projectile projectile;
 
-    public Player(GamePanel gp, KeyHandler keyH) {
+    public Player(GamePanel gp, KeyHandler keyH, MouseHandler mouseH) {
         super(gp);
         this.keyH = keyH;
+        this.mouseH = mouseH;
         this.animationLoader = new AnimationLoader(gp);
         bigSword = new BigSword(gp, keyH);
 
@@ -166,8 +170,16 @@ public class Player extends Entity {
             }
         }
 
-        if (keyH.shotKeyPressed == true && !projectile.alive) {
-            projectile.set(worldX, worldY, direction, true, this);
+        if (mouseH.leftClick && !projectile.alive) {
+            Point mousePos = gp.getMousePosition();
+
+            double mouseX = mousePos.getX();
+            double mouseY = mousePos.getY();
+
+            System.out.println("Mouse X: " + mouseX + " Mouse Y: " + mouseY);
+
+            double angle = Math.atan2(mouseY - screenY, mouseX - screenX);
+            projectile.set(worldX, worldY, angle, direction, true, this);
 
             gp.projectileList.add(projectile);
             System.out.println("shot");

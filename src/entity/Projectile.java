@@ -6,9 +6,11 @@ import main.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Projectile  extends Entity{
+public class Projectile extends Entity{
 
     Entity user;
+
+    double angle;
 
 
     public Projectile(GamePanel gp) {
@@ -16,32 +18,45 @@ public class Projectile  extends Entity{
         this.animationLoader = new AnimationLoader(gp);
     }
 
-    public void set(int worldX, int worldY, String direction, boolean alive, Entity user) {
-        System.out.println("WorldX: " + worldX + " WorldY: " + worldY);
+//    public void set(int worldX, int worldY, String direction, boolean alive, Entity user) {
+//        System.out.println("WorldX: " + worldX + " WorldY: " + worldY);
+//        this.worldX = worldX;
+//        this.worldY = worldY;
+//        this.direction = direction;
+//        this.alive = alive;
+//        this.user = user;
+//        this.life = this.maxLife;
+//
+//    }
+
+    public void set(int worldX, int worldY, double angle, String direction, boolean alive, Entity user) {
         this.worldX = worldX;
         this.worldY = worldY;
         this.direction = direction;
+        this.angle = angle;
         this.alive = alive;
         this.user = user;
         this.life = this.maxLife;
-
     }
 
     public void update() {
-        switch (direction) {
-            case "up":
-                worldY -= speed;
-                break;
-            case "down":
-                worldY += speed;
-                break;
-            case "left":
-                worldX -= speed;
-                break;
-            case "right":
-                worldX += speed;
-                break;
-        }
+//        switch (direction) {
+//            case "up":
+//                worldY -= speed;
+//                break;
+//            case "down":
+//                worldY += speed;
+//                break;
+//            case "left":
+//                worldX -= speed;
+//                break;
+//            case "right":
+//                worldX += speed;
+//                break;
+//        }
+
+        worldX += Math.cos(angle) * speed;
+        worldY += Math.sin(angle) * speed;
 
         life--;
         if (life <= 0) {

@@ -15,7 +15,7 @@ public class OBJ_SwordAtk extends Projectile {
 
 
         this.speed = 10;
-        this.maxLife = 80;
+        this.maxLife = 10;
         this.alive = false;
         getImage();
     }
