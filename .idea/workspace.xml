@@ -6,13 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="16aff991-6ba1-43d5-be88-4d4ecbe2c8f6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/entity/Entity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/entity/Entity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/main/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/main/GamePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Projectile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/object/OBJ_SwordAtk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/object/OBJ_SwordAtk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weapon/BigSword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weapon/BigSword.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +83,7 @@
       <updated>1671105951682</updated>
       <workItem from="1671105952888" duration="228000" />
       <workItem from="1671106192209" duration="3939000" />
-      <workItem from="1671482955992" duration="2471000" />
+      <workItem from="1671482955992" duration="10205000" />
     </task>
     <servers />
   </component>

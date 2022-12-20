@@ -13,7 +13,6 @@ public class BigSword extends Weapon {
         this.gp = gp;
         this.keyH = keyH;
         this.animationLoader = new AnimationLoader(gp);
-
         getWeaponImage();
     }
 

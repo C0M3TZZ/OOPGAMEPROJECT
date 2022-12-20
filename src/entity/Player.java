@@ -172,17 +172,16 @@ public class Player extends Entity {
 
         if (mouseH.leftClick && !projectile.alive) {
             Point mousePos = gp.getMousePosition();
+            if (mousePos != null) {
+                double mouseX = mousePos.getX();
+                double mouseY = mousePos.getY();
+                System.out.println("Mouse X: " + mouseX + " Mouse Y: " + mouseY);
+                double angle = Math.atan2(mouseY - screenY, mouseX - screenX);
+                projectile.set(worldX, worldY, angle, direction, true, this);
 
-            double mouseX = mousePos.getX();
-            double mouseY = mousePos.getY();
-
-            System.out.println("Mouse X: " + mouseX + " Mouse Y: " + mouseY);
-
-            double angle = Math.atan2(mouseY - screenY, mouseX - screenX);
-            projectile.set(worldX, worldY, angle, direction, true, this);
-
-            gp.projectileList.add(projectile);
-            System.out.println("shot");
+                gp.projectileList.add(projectile);
+                System.out.println("shot");
+            }
         }
 
         // update animation
@@ -206,7 +205,6 @@ public class Player extends Entity {
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
         }
         bigSword.draw(g2);
-
         g2.setColor(Color.RED);
         g2.draw(new Rectangle(screenX + solidAreaY.x, screenY + solidAreaY.y, solidAreaY.width, solidAreaY.height));
         g2.setColor(Color.GREEN);

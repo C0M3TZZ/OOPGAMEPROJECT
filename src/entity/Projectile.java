@@ -18,17 +18,6 @@ public class Projectile extends Entity{
         this.animationLoader = new AnimationLoader(gp);
     }
 
-//    public void set(int worldX, int worldY, String direction, boolean alive, Entity user) {
-//        System.out.println("WorldX: " + worldX + " WorldY: " + worldY);
-//        this.worldX = worldX;
-//        this.worldY = worldY;
-//        this.direction = direction;
-//        this.alive = alive;
-//        this.user = user;
-//        this.life = this.maxLife;
-//
-//    }
-
     public void set(int worldX, int worldY, double angle, String direction, boolean alive, Entity user) {
         this.worldX = worldX;
         this.worldY = worldY;
@@ -40,21 +29,6 @@ public class Projectile extends Entity{
     }
 
     public void update() {
-//        switch (direction) {
-//            case "up":
-//                worldY -= speed;
-//                break;
-//            case "down":
-//                worldY += speed;
-//                break;
-//            case "left":
-//                worldX -= speed;
-//                break;
-//            case "right":
-//                worldX += speed;
-//                break;
-//        }
-
         worldX += Math.cos(angle) * speed;
         worldY += Math.sin(angle) * speed;
 
@@ -73,6 +47,21 @@ public class Projectile extends Entity{
 
             spriteCounter = 0;
         }
+    }
+
+    public void draw(Graphics2D g2) {
+        BufferedImage image = animationLoader.getAnimation(this.direction).get(this.spriteNum);
+
+        this.screenX = worldX - gp.player.worldX + gp.player.screenX;
+        this.screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+        //make a new image that is rotated
+        BufferedImage rotatedImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = rotatedImage.createGraphics();
+        g.rotate(angle, image.getWidth() / 2, image.getHeight() / 2);
+        g.drawImage(image, null, 0, 0);
+        g.dispose();
+        g2.drawImage(rotatedImage, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
     }
 
 }
