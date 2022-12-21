@@ -8,7 +8,6 @@ public class BigSword extends Weapon {
     public BigSword(GamePanel gp) {
         this.gp = gp;
         this.animationLoader = new AnimationLoader(gp);
-
         getWeaponImage();
     }
 

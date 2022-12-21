@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
+<<<<<<< HEAD
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, xPressed;
 
@@ -11,6 +12,9 @@ public class KeyHandler implements KeyListener {
         this.gp = gp;
     }
 
+=======
+    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, shotKeyPressed;
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -34,6 +38,7 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_SHIFT) {
             shiftPressed = true;
         }
+<<<<<<< HEAD
         if (code == KeyEvent.VK_X) {
             xPressed = true;
         }
@@ -44,6 +49,10 @@ public class KeyHandler implements KeyListener {
             else if (gp.gameState == gp.pauseState) {
                 gp.gameState = gp.playState;
             }
+=======
+        if (code == KeyEvent.VK_SPACE) {
+            shotKeyPressed = true;
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
         }
     }
 
@@ -65,8 +74,13 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_SHIFT) {
             shiftPressed = false;
         }
+<<<<<<< HEAD
         if (code == KeyEvent.VK_X) {
             xPressed = false;
+=======
+        if (code == KeyEvent.VK_SPACE) {
+            shotKeyPressed = false;
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
         }
     }
 }

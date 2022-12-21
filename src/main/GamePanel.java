@@ -1,6 +1,11 @@
 package main;
 
+<<<<<<< HEAD
 import entity.*;
+=======
+import entity.Entity;
+import entity.Player;
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
 import object.SuperObject;
 import tile.TileManager;
 import ui.UI;
@@ -8,7 +13,10 @@ import ui.UI;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.concurrent.ThreadLocalRandom;
+=======
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
 
 public class GamePanel extends JPanel implements Runnable {
     public final int originalTileSize = 8;
@@ -26,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
     TileManager tileM = new TileManager(this);
+<<<<<<< HEAD
     public KeyHandler keyH = new KeyHandler(this);
     public MouseHandler mouseH = new MouseHandler(this);
     Thread gameThread;
@@ -38,6 +47,17 @@ public class GamePanel extends JPanel implements Runnable {
     public int gameState;
     public final int playState = 1;
     public final int pauseState = 2;
+=======
+    KeyHandler keyH = new KeyHandler();
+    MouseHandler mouseH = new MouseHandler(this);
+    Thread gameThread;
+    public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter assetSetter = new AssetSetter(this);
+    public Player player = new Player(this, keyH, mouseH);
+    public SuperObject obj[] = new SuperObject[10];
+    public Entity monster[] = new Entity[10];
+    public ArrayList<Entity> projectileList = new ArrayList<>();
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
 
     public GamePanel() {
 
@@ -52,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setUpGame() {
         assetSetter.setObject();
+<<<<<<< HEAD
         gameState = playState;
     }
 
@@ -71,6 +92,9 @@ public class GamePanel extends JPanel implements Runnable {
                 player = new PY_BankSensei(this);
                 break;
         }
+=======
+        assetSetter.setMonster();
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
     }
 
     public void startGameThread() {
@@ -103,6 +127,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
+<<<<<<< HEAD
         if (gameState == playState) {
             player.update();
 
@@ -120,6 +145,27 @@ public class GamePanel extends JPanel implements Runnable {
                     if (!projectileList.get(i).alive) {
                         projectileList.remove(i);
                     }
+=======
+        player.update();
+        for (int i = 0; i < monster.length; i++) {
+            if (monster[i] != null) {
+                if(monster[i].alive) {
+                    monster[i].update();
+                }
+                if (!monster[i].alive) {
+                    monster[i] = null;
+                }
+            }
+        }
+
+        for (int i = 0; i < projectileList.size(); i++) {
+            if (projectileList.get(i) != null) {
+                if (projectileList.get(i).alive) {
+                    projectileList.get(i).update();
+                }
+                if (!projectileList.get(i).alive) {
+                    projectileList.remove(i);
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
                 }
             }
         }
@@ -134,7 +180,23 @@ public class GamePanel extends JPanel implements Runnable {
 
         for (int i = 0; i < obj.length; i++) {
             if (obj[i] != null) {
+<<<<<<< HEAD
                 obj[i].draw(g2, this, "healthPotion");
+            }
+        }
+
+        for (int i = 0; i < projectileList.size(); i++) {
+            if (projectileList.get(i) != null) {
+                projectileList.get(i).draw(g2);
+=======
+                obj[i].draw(g2, this);
+            }
+        }
+
+        for (int i = 0; i < monster.length; i++) {
+            if (monster[i] != null) {
+                monster[i].draw(g2);
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
             }
         }
 

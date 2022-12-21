@@ -2,8 +2,11 @@ package main;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+<<<<<<< HEAD
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+=======
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
 
 public class MouseHandler implements MouseListener {
 
@@ -24,6 +27,7 @@ public class MouseHandler implements MouseListener {
         if (mouseEvent.getButton() == MouseEvent.BUTTON1) {
             leftClick = true;
         }
+<<<<<<< HEAD
         if (gp.gameState == gp.pauseState) {
             for (int i = 0; i < gp.ui.pauseScreen.button.buttonNameArr.size(); i++) {
                 if (gp.ui.pauseScreen.button.buttonR2Arr.get(i).contains(mouseEvent.getPoint())) {
@@ -35,6 +39,8 @@ public class MouseHandler implements MouseListener {
                 }
             }
         }
+=======
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
     }
 
     @Override
@@ -53,4 +59,8 @@ public class MouseHandler implements MouseListener {
     public void mouseExited(MouseEvent mouseEvent) {
 
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
