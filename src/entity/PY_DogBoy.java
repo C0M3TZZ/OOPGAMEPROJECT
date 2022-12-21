@@ -8,6 +8,7 @@ import java.awt.*;;
 
 public class PY_DogBoy extends Player {
     BigSword bigSword;
+
     public PY_DogBoy(GamePanel gp) {
         super(gp);
         bigSword = new BigSword(gp);
@@ -15,38 +16,52 @@ public class PY_DogBoy extends Player {
 
     public void getPlayerImage() {
         try {
-            animationLoader.LoadAnimation("player/dogBoy.png", 0, 3, "up");
-            animationLoader.LoadAnimation("player/dogBoy.png", 4, 7, "left");
-            animationLoader.LoadAnimation("player/dogBoy.png", 4, 7, "right");
-            animationLoader.LoadAnimation("player/dogBoy.png", 8, 11, "down");
+            // BASIC
+            animationLoader.LoadAnimation("player/dogBoy/basic.png", 0, 7, "idle");
+            animationLoader.LoadAnimation("player/dogBoy/basic.png", 8, 15, "up");
+            animationLoader.LoadAnimation("player/dogBoy/basic.png", 16, 23, "left");
+            animationLoader.LoadAnimation("player/dogBoy/basic.png", 16, 23, "right");
+            animationLoader.LoadAnimation("player/dogBoy/basic.png", 24, 31, "down");
+            animationLoader.LoadAnimation("player/dogBoy/basic.png", 32, 39, "dashUp");
+            animationLoader.LoadAnimation("player/dogBoy/basic.png", 40, 47, "dashLeft");
+            animationLoader.LoadAnimation("player/dogBoy/basic.png", 40, 47, "dashRight");
+            animationLoader.LoadAnimation("player/dogBoy/basic.png", 48, 55, "dashDown");
 
-            animationLoader.LoadAnimation("player/dogBoy.png", 12, 15, "idle");
+            // PRESS ULTI
+            animationLoader.LoadAnimation("player/dogBoy/pressUlti.png", 0, 9, "pressUlti");
 
-            animationLoader.LoadAnimation("player/dogBoy.png", 16, 19, "dashUp");
-            animationLoader.LoadAnimation("player/dogBoy.png", 20, 23, "dashLeft");
-            animationLoader.LoadAnimation("player/dogBoy.png", 20, 23, "dashRight");
-            animationLoader.LoadAnimation("player/dogBoy.png", 24, 27, "dashDown");
-
-            animationLoader.LoadAnimation("player/dogBoy.png", 28, 37, "pressUlti");
-
-            animationLoader.LoadAnimation("player/dogBoy.png", 38, 41, "upUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 42, 45, "leftUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 42, 45, "rightUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 46, 49, "downUlti");
-
-            animationLoader.LoadAnimation("player/dogBoy.png", 50, 53, "idleUlti");
-
-            animationLoader.LoadAnimation("player/dogBoy.png", 54, 57, "dashUpUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 58, 61, "dashLeftUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 58, 61, "dashRightUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 62, 65, "dashDownUlti");
+            // ULTI
+            animationLoader.LoadAnimation("player/dogBoy/ulti.png", 0, 7, "idleUlti");
+            animationLoader.LoadAnimation("player/dogBoy/ulti.png", 8, 15, "upUlti");
+            animationLoader.LoadAnimation("player/dogBoy/ulti.png", 16, 23, "leftUlti");
+            animationLoader.LoadAnimation("player/dogBoy/ulti.png", 16, 23, "rightUlti");
+            animationLoader.LoadAnimation("player/dogBoy/ulti.png", 24, 31, "downUlti");
+            animationLoader.LoadAnimation("player/dogBoy/ulti.png", 32, 39, "dashUpUlti");
+            animationLoader.LoadAnimation("player/dogBoy/ulti.png", 40, 47, "dashLeftUlti");
+            animationLoader.LoadAnimation("player/dogBoy/ulti.png", 40, 47, "dashRightUlti");
+            animationLoader.LoadAnimation("player/dogBoy/ulti.png", 48, 55, "dashDownUlti");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void update() {
+        //RUN
+        super.getDirection();
+
+        // ULTIMATE
+        super.getUltimate();
+
+        //DASHING
+        super.getDashing();
+
+        // UPDATE
+        super.update();
+    }
+
     public void draw(Graphics2D g2) {
         super.draw(g2);
         bigSword.draw(g2);
+        super.drawShadow(g2);
     }
 }

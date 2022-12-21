@@ -21,13 +21,6 @@ public class Entity {
     public int maxLife = 0;
     GamePanel gp;
     public AnimationLoader animationLoader;
-<<<<<<< HEAD
-=======
-
-    public boolean alive = true;
-    public int life = 0;
-    public int maxLife = 0;
->>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
 
     public Entity(GamePanel gp) {
         this.gp = gp;

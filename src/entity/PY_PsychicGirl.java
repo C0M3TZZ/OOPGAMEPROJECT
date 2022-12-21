@@ -1,8 +1,6 @@
 package entity;
 
 import main.GamePanel;
-import main.KeyHandler;
-import main.MouseHandler;
 import weapon.BigSword;
 
 import java.awt.*;;
@@ -17,48 +15,86 @@ public class PY_PsychicGirl extends Player {
 
     public void getPlayerImage() {
         try {
-            animationLoader.LoadAnimation("player/psychicGirl.png", 0, 3, "up");
-            animationLoader.LoadAnimation("player/psychicGirl.png", 4, 7, "left");
-            animationLoader.LoadAnimation("player/psychicGirl.png", 8, 11, "down");
-            animationLoader.LoadAnimation("player/psychicGirl.png", 12, 15, "right");
+            // BASIC
+            animationLoader.LoadAnimation("player/psychicGirl/basic.png", 0, 7, "idle");
+            animationLoader.LoadAnimation("player/psychicGirl/basic.png", 8, 15, "up");
+            animationLoader.LoadAnimation("player/psychicGirl/basic.png", 16, 23, "left");
+            animationLoader.LoadAnimation("player/psychicGirl/basic.png", 24, 31, "down");
+            animationLoader.LoadAnimation("player/psychicGirl/basic.png", 32, 39, "right");
+            animationLoader.LoadAnimation("player/psychicGirl/basic.png", 40, 47, "dashUp");
+            animationLoader.LoadAnimation("player/psychicGirl/basic.png", 48, 55, "dashLeft");
+            animationLoader.LoadAnimation("player/psychicGirl/basic.png", 56, 63, "dashDown");
+            animationLoader.LoadAnimation("player/psychicGirl/basic.png", 64, 71, "dashRight");
 
-            animationLoader.LoadAnimation("player/psychicGirl.png", 16, 23, "dashUp");
-            animationLoader.LoadAnimation("player/psychicGirl.png", 24, 31, "dashDown");
-            animationLoader.LoadAnimation("player/psychicGirl.png", 32, 38, "dashLeft");
-            animationLoader.LoadAnimation("player/psychicGirl.png", 39, 46, "dashRight");
-
-            animationLoader.LoadAnimation("player/psychicGirl_pressUlti.png", 0, 7, "pressUlti", 128);
-
-            animationLoader.LoadAnimation("player/dogBoy.png", 12, 15, "idle");;
-
-            animationLoader.LoadAnimation("player/dogBoy.png", 38, 41, "upUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 42, 45, "leftUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 42, 45, "rightUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 46, 49, "downUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 50, 53, "idleUlti");
-
-            animationLoader.LoadAnimation("player/dogBoy.png", 54, 57, "dashUpUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 58, 61, "dashLeftUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 58, 61, "dashRightUlti");
-            animationLoader.LoadAnimation("player/dogBoy.png", 62, 65, "dashDownUlti");
+            // PRESS ULTI
+            animationLoader.LoadAnimation("player/psychicGirl/pressUlti.png", 0, 7, "pressUlti", 128);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void getUltimate() {
+        if (keyH.xPressed && !pressUltimate) {
+            spriteNum = 0;
+            ultimate = true;
+            pressUltimate = true;
+        }
+        if (ultimate) {
+            if (!pressUltimate) {
+                ultimate = false;
+                direction = "idle";
+            }
+        }
+    }
+
+    public void update() {
+        //RUN
+        super.getDirection();
+
+        // ULTIMATE
+        this.getUltimate();
+
+        //DASHING
+        super.getDashing();
+
+        // UPDATE
+        if (pressUltimate) {
+            direction = "pressUlti";
+        }
+
+        // update animation
+        spriteCounter++;
+        if (spriteCounter > spriteCounterLimit) {
+            if (spriteNum != animationLoader.getAnimation(direction).size() - 1) {
+                spriteNum++;
+            } else {
+                if (dashing) {
+                    dashing = false;
+                }
+                if (pressUltimate) {
+                    pressUltimate = false;
+                    direction = "idle";
+                }
+                spriteNum = 0;
+            }
+            spriteCounter = 0;
+        }
+    }
+
     public void draw(Graphics2D g2) {
         image = animationLoader.getAnimation(direction).get(spriteNum);
+
         if (direction.equals("pressUlti")) {
             g2.drawImage(image, screenX - gp.tileSize, screenY - gp.tileSize * 2, gp.tileSize * 2 * 2, gp.tileSize * 2 * 2, null);
         } else {
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
         }
 
-        g2.setColor(Color.RED);
-        g2.draw(new Rectangle(screenX + solidAreaY.x, screenY + solidAreaY.y, solidAreaY.width, solidAreaY.height));
-        g2.setColor(Color.GREEN);
-        g2.draw(new Rectangle(screenX + solidAreaX.x, screenY + solidAreaX.y, solidAreaX.width, solidAreaX.height));
+        super.drawShadow(g2);
 
-        bigSword.draw(g2);
+//        g2.setColor(Color.RED);
+//        g2.draw(new Rectangle(screenX + solidAreaY.x, screenY + solidAreaY.y, solidAreaY.width, solidAreaY.height));
+//        g2.setColor(Color.GREEN);
+//        g2.draw(new Rectangle(screenX + solidAreaX.x, screenY + solidAreaX.y, solidAreaX.width, solidAreaX.height));
     }
 }

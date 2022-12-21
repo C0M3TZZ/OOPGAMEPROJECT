@@ -3,11 +3,6 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 import main.MouseHandler;
-<<<<<<< HEAD
-=======
-import object.OBJ_SwordAtk;
-import weapon.BigSword;
->>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,7 +12,6 @@ import java.util.Objects;
 
 public class Player extends Entity {
     KeyHandler keyH;
-<<<<<<< HEAD
     MouseHandler mouseH;
     public final int screenX, screenY;
     public boolean dashing;
@@ -35,23 +29,6 @@ public class Player extends Entity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-=======
-
-    MouseHandler mouseH;
-    BigSword bigSword;
-    public final int screenX;
-    public final int screenY;
-    public int dashingCounter;
-    public boolean dashing;
-    public Projectile projectile;
-
-    public Player(GamePanel gp, KeyHandler keyH, MouseHandler mouseH) {
-        super(gp);
-        this.keyH = keyH;
-        this.mouseH = mouseH;
-        this.animationLoader = new AnimationLoader(gp);
-        bigSword = new BigSword(gp, keyH);
->>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
 
         this.screenX = (gp.screenWidth / 2) - gp.tileSize;
         this.screenY = (gp.screenHeight / 2) - gp.tileSize;
@@ -59,20 +36,8 @@ public class Player extends Entity {
         solidAreaX = new Rectangle(4 + 32 + 4 + 4, 8 + 56 + 28, 40, 48 - 28);
         solidAreaY = new Rectangle(8 + 32 + 4 + 4, 4 + 56 + 28, 32, 48 - 28 + 4 + 4);
 
-<<<<<<< HEAD
         solidAreaXDefaultX = solidAreaX.x;
         solidAreaXDefaultY = solidAreaX.y;
-
-        solidAreaYDefaultX = solidAreaY.x;
-        solidAreaYDefaultY = solidAreaY.y;
-=======
-        solidAreaX = new Rectangle(4 + 32 + 4 + 4, 8 + 56 + 28, 40, 50 - 28);
-
-        solidAreaXDefaultX = solidAreaX.x;
-        solidAreaXDefaultY = solidAreaX.y;
-
-        solidAreaY = new Rectangle(8 + 32 + 4 + 4, 5 + 56 + 28, 32, 55 - 28);
->>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
 
         solidAreaYDefaultX = solidAreaY.x;
         solidAreaYDefaultY = solidAreaY.y;
@@ -86,116 +51,105 @@ public class Player extends Entity {
         worldY = gp.tileSize * 21;
         speed = 4;
         direction = "idle";
-
-        projectile = new OBJ_SwordAtk(gp);
     }
 
-    public void getPlayerImage() {
+    public void getPlayerImage() {};
 
-    };
-
-    public void touchObject(int index) {
-        if (index != -1) {
-            if (gp.obj[index].pickUpable) {
-                pickUpItem(index);
-            } else {
-                gp.obj[index].action();
-                System.out.println("You can't pick up this item");
-            }
-        }
-    }
-
-    public void pickUpItem(int index) {
-        if (index != -1) {
-            gp.obj[index].action();
-            gp.obj[index] = null;
-        }
-    }
-
-    public void update() {
+    public void getDirection() {
         gp.cChecker.checkTile(this);
-        int objectIndex = gp.cChecker.checkObject(this, true);
-
-        touchObject(objectIndex);
-
-        // ULTIMATE
-        if (keyH.xPressed) {
-            ultimate = true;
-            pressUltimate = true;
-            ultimateStart = System.currentTimeMillis();
-        }
-        if (ultimate) {
-            ultimateEnd = System.currentTimeMillis();
-            if ((ultimateEnd-ultimateStart)/1000 == 30) {
-                ultimate = false;
-            }
-        }
-
-        // RUN
         if (keyH.upPressed) {
-            if (!ultimate) {
-                direction = "up";
-            }
-            else {
-                direction = "upUlti";
+            if (!dashing) {
+                if (ultimate) {
+                    direction = "upUlti";
+                }
+                else {
+                    direction = "up";
+                }
             }
             if (!topHit && !pressUltimate) {
                 worldY -= speed;
             }
         }
         if (keyH.downPressed) {
-            if (!ultimate) {
-                direction = "down";
-            }
-            else {
-                direction = "downUlti";
+            if (!dashing) {
+                if (ultimate) {
+                    direction = "downUlti";
+                }
+                else {
+                    direction = "down";
+                }
             }
             if (!bottomHit && !pressUltimate) {
                 worldY += speed;
             }
         }
         if (keyH.rightPressed) {
-            if (!ultimate) {
-                direction = "right";
-            }
-            else {
-                direction = "rightUlti";
+            if (!dashing) {
+                if (ultimate) {
+                    direction = "rightUlti";
+                }
+                else {
+                    direction = "right";
+                }
             }
             if (!rightHit && !pressUltimate) {
                 worldX += speed;
             }
         }
         if (keyH.leftPressed) {
-            if (!ultimate) {
-                direction = "left";
-            }
-            else {
-                direction = "leftUlti";
+            if (!dashing) {
+                if (ultimate) {
+                    direction = "leftUlti";
+                }
+                else {
+                    direction = "left";
+                }
             }
             if (!leftHit && !pressUltimate) {
                 worldX -= speed;
             }
         }
         if (!keyH.upPressed && !keyH.downPressed && !keyH.leftPressed && !keyH.rightPressed) {
-            if (!ultimate) {
-                direction = "idle";
-            }
-            else {
-                direction = "idleUlti";
+            if (!dashing) {
+                if (ultimate) {
+                    direction = "idleUlti";
+                }
+                else {
+                    direction = "idle";
+                }
             }
         }
+    }
 
+    public void getUltimate() {
+        if (keyH.xPressed && !pressUltimate) {
+            spriteNum = 0;
+            ultimate = true;
+            pressUltimate = true;
+            ultimateStart = System.currentTimeMillis();
+        }
+        if (ultimate) {
+            ultimateEnd = System.currentTimeMillis();
+            if ((ultimateEnd-ultimateStart)/1000 == 10) {
+                ultimate = false;
+            }
+        }
+    }
+
+    public void getDashing() {
         gp.cChecker.checkTile(this);
-        // DASH
         if (keyH.shiftPressed && direction != "idle" && !pressUltimate) {
-            if (dashingCounter == 0) {
+            if (!dashing) {
                 spriteNum = 0;
             }
-            dashingCounter++;
             dashing = true;
+            dashingCounter++;
+        }
+        if (!keyH.shiftPressed) {
+            dashingCounter = 0;
         }
         if (dashingCounter > 0 && dashingCounter <= 20) {
-            if (direction.equals("up") || direction.equals("upUlti")) {
+            if (keyH.upPressed) {
                 if (!ultimate) {
                     direction = "dashUp";
                 }
@@ -206,7 +160,7 @@ public class Player extends Entity {
                     worldY -= speed;
                 }
             }
-            if (direction.equals("down") || direction.equals("downUlti")) {
+            if (keyH.downPressed) {
                 if (!ultimate) {
                     direction = "dashDown";
                 }
@@ -217,7 +171,7 @@ public class Player extends Entity {
                     worldY += speed;
                 }
             }
-            if (direction.equals("left") || direction.equals("leftUlti")) {
+            if (keyH.leftPressed) {
                 if (!ultimate) {
                     direction = "dashLeft";
                 }
@@ -228,7 +182,7 @@ public class Player extends Entity {
                     worldX -= speed;
                 }
             }
-            if (direction.equals("right") || direction.equals("rightUlti")) {
+            if (keyH.rightPressed) {
                 if (!ultimate) {
                     direction = "dashRight";
                 }
@@ -243,30 +197,14 @@ public class Player extends Entity {
         if (!keyH.shiftPressed) {
             if (dashingCounter < 20 && dashing) {
                 dashingCounter++;
-            } else {
-                dashingCounter = 0;
-                dashing = false;
             }
         }
+    }
 
-<<<<<<< HEAD
+    public void update() {
         // ULTIMATE
         if (pressUltimate) {
             direction = "pressUlti";
-            spriteCounterLimit = 5;
-=======
-        if (mouseH.leftClick && !projectile.alive) {
-            Point mousePos = gp.getMousePosition();
-            if (mousePos != null) {
-                double mouseX = mousePos.getX();
-                double mouseY = mousePos.getY();
-
-                double angle = Math.atan2(mouseY - screenY, mouseX - screenX);
-                projectile.set(worldX, worldY, angle, direction, true, this);
-
-                gp.projectileList.add(projectile);
-            }
->>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
         }
 
         // update animation
@@ -275,8 +213,12 @@ public class Player extends Entity {
             if (spriteNum != animationLoader.getAnimation(direction).size() - 1) {
                 spriteNum++;
             } else {
-                pressUltimate = false;
-                spriteCounterLimit = 10;
+                if (dashing) {
+                    dashing = false;
+                }
+                if (pressUltimate) {
+                    pressUltimate = false;
+                }
                 spriteNum = 0;
             }
             spriteCounter = 0;
@@ -290,16 +232,14 @@ public class Player extends Entity {
         } else {
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
         }
-<<<<<<< HEAD
-//        g2.drawImage(shadow, 0, 0, gp.screenWidth, gp.screenHeight, null);
 
-=======
-        bigSword.draw(g2);
->>>>>>> b118af326173c0b4da0b20a4ad53e539b211e5ca
         g2.setColor(Color.RED);
         g2.draw(new Rectangle(screenX + solidAreaY.x, screenY + solidAreaY.y, solidAreaY.width, solidAreaY.height));
         g2.setColor(Color.GREEN);
         g2.draw(new Rectangle(screenX + solidAreaX.x, screenY + solidAreaX.y, solidAreaX.width, solidAreaX.height));
+    }
 
+    public void drawShadow(Graphics2D g2) {
+        g2.drawImage(shadow, 0, 0, gp.screenWidth, gp.screenHeight, null);
     }
 }
