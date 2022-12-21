@@ -36,6 +36,8 @@ public class Entity {
     public void attacked(int damage) {
         if (!invincible) {
             life -= damage;
+            System.out.println("Life: " + life);
+            System.out.println("Attack: " + damage);
             invincible = true;
             System.out.println("Turning invincible on");
         }

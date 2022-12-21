@@ -12,7 +12,7 @@ public class Projectile extends Entity {
 
     double angle;
 
-
+    public int attack = 1;
     public Projectile(GamePanel gp) {
         super(gp);
         this.animationLoader = new AnimationLoader(gp);
@@ -39,9 +39,11 @@ public class Projectile extends Entity {
         if (user.equals(gp.player)) {
             int monsterHit = gp.cChecker.checkEntity(this, gp.monster);
             if (monsterHit != -1) {
-                gp.monster.get(monsterHit).attacked(1);
+                gp.monster.get(monsterHit).attacked(attack);
                 System.out.println("Monster Health: " + gp.monster.get(monsterHit).life);
-                this.alive = false;
+                if (angle != 0) {
+                    this.alive = false;
+                }
             }
         }
         worldX += Math.cos(angle) * speed;

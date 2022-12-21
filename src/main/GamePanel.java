@@ -58,16 +58,16 @@ public class GamePanel extends JPanel implements Runnable {
         int randomPlayer = ThreadLocalRandom.current().nextInt(1, 5);
         switch (randomPlayer) {
             case 1:
-                player = new PY_DogBoy(this);
+                player = new PY_PsychicGirl(this);
                 break;
             case 2:
                 player = new PY_PsychicGirl(this);
                 break;
             case 3:
-                player = new PY_Cyborg(this);
+                player = new PY_PsychicGirl(this);
                 break;
             case 4:
-                player = new PY_BankSensei(this);
+                player = new PY_PsychicGirl(this);
                 break;
         }
     }

@@ -24,6 +24,8 @@ public class Player extends Entity {
     int attackCounter = 0;
     public String name;
 
+    public int attack = 1;
+
     public Player(GamePanel gp) {
         super(gp);
         this.keyH = gp.keyH;
@@ -156,13 +158,23 @@ public class Player extends Entity {
             ultimate = true;
             pressUltimate = true;
             ultimateStart = System.currentTimeMillis();
+            useUlti();
         }
         if (ultimate) {
             ultimateEnd = System.currentTimeMillis();
             if ((ultimateEnd-ultimateStart)/1000 == 10) {
                 ultimate = false;
+                endUlti();
             }
         }
+    }
+
+    public void useUlti() {
+
+    }
+
+    public void endUlti() {
+
     }
 
     public void getDashing() {
@@ -246,14 +258,14 @@ public class Player extends Entity {
         int objectIndex = gp.cChecker.checkObject(this, true);
         touchObject(objectIndex);
 
-        if (mouseH.leftClick && !projectile.alive && attackCounter <= 0) {
+        if (mouseH.leftClick && !projectile.alive && attackCounter <= 0 && !dashing) {
             Point mousePos = gp.getMousePosition();
             if (mousePos != null) {
                 double mouseX = mousePos.getX();
                 double mouseY = mousePos.getY();
 
                 double angle = Math.atan2(mouseY - screenY, mouseX - screenX);
-                projectile.set(worldX, worldY, angle, direction, true, this);
+                projectile.set(worldX, worldY, angle, "idle", true, this);
                 attackCounter = 30;
 
                 gp.projectileList.add(projectile);

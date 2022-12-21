@@ -11,7 +11,7 @@ public class Monster extends Entity {
         super(gp);
 
         this.speed = 1;
-        this.maxLife = 1;
+        this.maxLife = 3;
         life = maxLife;
         this.solidAreaX = new Rectangle(4 + 20, 8 + 56 + 28, 40, 50 - 28);
 

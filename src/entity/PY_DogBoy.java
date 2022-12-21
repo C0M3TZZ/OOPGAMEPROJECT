@@ -60,6 +60,14 @@ public class PY_DogBoy extends Player {
         super.update();
     }
 
+    public void useUlti() {
+        this.projectile.attack = 3;
+    }
+
+    public void endUlti() {
+        this.projectile.attack = attack;
+    }
+
     public void draw(Graphics2D g2) {
         super.draw(g2);
         bigSword.draw(g2);
