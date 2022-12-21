@@ -62,13 +62,13 @@ public class GamePanel extends JPanel implements Runnable {
                 player = new PY_DogBoy(this);
                 break;
             case 2:
-                player = new PY_DogBoy(this);
+                player = new PY_PsychicGirl(this);
                 break;
             case 3:
-                player = new PY_DogBoy(this);
+                player = new PY_Cyborg(this);
                 break;
             case 4:
-                player = new PY_DogBoy(this);
+                player = new PY_BankSensei(this);
                 break;
         }
     }
