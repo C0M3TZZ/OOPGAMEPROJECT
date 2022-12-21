@@ -2,6 +2,8 @@ package main;
 
 import entity.Entity;
 
+import java.util.ArrayList;
+
 public class CollisionChecker {
     GamePanel gp;
 
@@ -137,24 +139,24 @@ public class CollisionChecker {
         return index;
     }
 
-    public int checkEntity(Entity entity, Entity[] target) {
+    public int checkEntity(Entity entity, ArrayList<Entity> target) {
         int index = -1;
 
-        for (int i = 0; i < target.length; i++) {
-            if (target[i] != null) {
+        for (int i = 0; i < target.size(); i++) {
+            if (target.get(i) != null) {
                 entity.solidAreaX.x = entity.worldX + entity.solidAreaX.x;
                 entity.solidAreaX.y = entity.worldY + entity.solidAreaX.y;
 
                 entity.solidAreaY.x = entity.worldX + entity.solidAreaY.x;
                 entity.solidAreaY.y = entity.worldY + entity.solidAreaY.y;
 
-                target[i].solidAreaX.x = target[i].worldX + target[i].solidAreaX.x;
-                target[i].solidAreaX.y = target[i].worldY + target[i].solidAreaX.y;
+                target.get(i).solidAreaX.x = target.get(i).worldX + target.get(i).solidAreaX.x;
+                target.get(i).solidAreaX.y = target.get(i).worldY + target.get(i).solidAreaX.y;
 
                 if (entity.direction.equals("up")) {
                     entity.solidAreaX.y -= entity.speed;
                     entity.solidAreaY.y -= entity.speed;
-                    if (entity.solidAreaX.intersects(target[i].solidAreaX) || entity.solidAreaY.intersects(target[i].solidAreaX)) {
+                    if (entity.solidAreaX.intersects(target.get(i).solidAreaX) || entity.solidAreaY.intersects(target.get(i).solidAreaX)) {
                         index = i;
                     }
                 }
@@ -162,7 +164,7 @@ public class CollisionChecker {
                 if (entity.direction.equals("down")) {
                     entity.solidAreaX.y += entity.speed;
                     entity.solidAreaY.y += entity.speed;
-                    if (entity.solidAreaX.intersects(target[i].solidAreaX) || entity.solidAreaY.intersects(target[i].solidAreaX)) {
+                    if (entity.solidAreaX.intersects(target.get(i).solidAreaX) || entity.solidAreaY.intersects(target.get(i).solidAreaX)) {
                         index = i;
                     }
                 }
@@ -170,7 +172,7 @@ public class CollisionChecker {
                 if (entity.direction.equals("left")) {
                     entity.solidAreaX.x -= entity.speed;
                     entity.solidAreaY.x -= entity.speed;
-                    if (entity.solidAreaX.intersects(target[i].solidAreaX) || entity.solidAreaY.intersects(target[i].solidAreaX)) {
+                    if (entity.solidAreaX.intersects(target.get(i).solidAreaX) || entity.solidAreaY.intersects(target.get(i).solidAreaX)) {
                         index = i;
                     }
                 }
@@ -178,13 +180,13 @@ public class CollisionChecker {
                 if (entity.direction.equals("right")) {
                     entity.solidAreaX.x += entity.speed;
                     entity.solidAreaY.x += entity.speed;
-                    if (entity.solidAreaX.intersects(target[i].solidAreaX) || entity.solidAreaY.intersects(target[i].solidAreaX)) {
+                    if (entity.solidAreaX.intersects(target.get(i).solidAreaX) || entity.solidAreaY.intersects(target.get(i).solidAreaX)) {
                         index = i;
                     }
                 }
 
                 if (entity.direction.equals("idle")) {
-                    if (entity.solidAreaX.intersects(target[i].solidAreaX) || entity.solidAreaY.intersects(target[i].solidAreaX)) {
+                    if (entity.solidAreaX.intersects(target.get(i).solidAreaX) || entity.solidAreaY.intersects(target.get(i).solidAreaX)) {
                         index = i;
                     }
                 }
@@ -194,10 +196,10 @@ public class CollisionChecker {
                 entity.solidAreaY.x = entity.solidAreaYDefaultX;
                 entity.solidAreaY.y = entity.solidAreaYDefaultY;
 
-                target[i].solidAreaX.x = target[i].solidAreaXDefaultX;
-                target[i].solidAreaX.y = target[i].solidAreaXDefaultY;
-                target[i].solidAreaY.x = target[i].solidAreaYDefaultX;
-                target[i].solidAreaY.y = target[i].solidAreaYDefaultY;
+                target.get(i).solidAreaX.x = target.get(i).solidAreaXDefaultX;
+                target.get(i).solidAreaX.y = target.get(i).solidAreaXDefaultY;
+                target.get(i).solidAreaY.x = target.get(i).solidAreaYDefaultX;
+                target.get(i).solidAreaY.y = target.get(i).solidAreaYDefaultY;
 
             }
 
