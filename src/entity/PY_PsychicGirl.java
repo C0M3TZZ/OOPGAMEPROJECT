@@ -1,6 +1,7 @@
 package entity;
 
 import main.GamePanel;
+import object.OBJ_MagicOrb;
 import weapon.BigSword;
 
 import java.awt.*;;
@@ -11,6 +12,7 @@ public class PY_PsychicGirl extends Player {
     public PY_PsychicGirl(GamePanel gp) {
         super(gp);
         bigSword = new BigSword(gp);
+        this.projectile = new OBJ_MagicOrb(gp);
     }
 
     public void getPlayerImage() {
