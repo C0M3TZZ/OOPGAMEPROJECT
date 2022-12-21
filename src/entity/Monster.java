@@ -11,7 +11,7 @@ public class Monster extends Entity {
         super(gp);
 
         this.speed = 1;
-        this.maxLife = 10;
+        this.maxLife = 1;
         life = maxLife;
         this.solidAreaX = new Rectangle(4 + 20, 8 + 56 + 28, 40, 50 - 28);
 
@@ -52,9 +52,11 @@ public class Monster extends Entity {
         } else if (this.worldY > gp.player.worldY && !topHit) {
             this.worldY -= this.speed;
         }
-        if (gp.cChecker.checkPlayer(this, gp.player)) {
-            gp.player.life -= 1;
+        if (gp.cChecker.checkPlayer(this, gp.player) && !gp.player.dashing) {
+            gp.player.attacked(1);
         }
     }
+
+
 
 }

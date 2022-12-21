@@ -22,17 +22,39 @@ public class CollisionChecker {
         int hitYTop = (entity.worldY + entity.solidAreaY.y) / (gp.tileSize*2);
         int hitYBottom = (entity.worldY + entity.solidAreaY.y + entity.solidAreaY.height) / (gp.tileSize*2);
 
-        int topHitPos1 = gp.tileM.mapTileNum[hitYLeft][hitYTop];
-        int topHitPos2 = gp.tileM.mapTileNum[hitYRight][hitYTop];
+        int topHitPos1;
+        int topHitPos2;
 
-        int bottomHitPos1 = gp.tileM.mapTileNum[hitYLeft][hitYBottom];
-        int bottomHitPos2 = gp.tileM.mapTileNum[hitYRight][hitYBottom];
+        int bottomHitPos1;
+        int bottomHitPos2;
 
-        int leftHitPos1 = gp.tileM.mapTileNum[hitXLeft][hitXTop];
-        int leftHitPos2 = gp.tileM.mapTileNum[hitXLeft][hitXBottom];
+        int leftHitPos1;
+        int leftHitPos2;
 
-        int rightHitPos1 = gp.tileM.mapTileNum[hitXRight][hitXTop];
-        int rightHitPos2 = gp.tileM.mapTileNum[hitXRight][hitXBottom];
+        int rightHitPos1;
+        int rightHitPos2;
+
+        try {
+            topHitPos1 = gp.tileM.mapTileNum[hitYLeft][hitYTop];
+            topHitPos2 = gp.tileM.mapTileNum[hitYRight][hitYTop];
+
+            bottomHitPos1 = gp.tileM.mapTileNum[hitYLeft][hitYBottom];
+            bottomHitPos2 = gp.tileM.mapTileNum[hitYRight][hitYBottom];
+
+            leftHitPos1 = gp.tileM.mapTileNum[hitXLeft][hitXTop];
+            leftHitPos2 = gp.tileM.mapTileNum[hitXLeft][hitXBottom];
+
+            rightHitPos1 = gp.tileM.mapTileNum[hitXRight][hitXTop];
+            rightHitPos2 = gp.tileM.mapTileNum[hitXRight][hitXBottom];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            entity.topHit = true;
+            entity.bottomHit = true;
+            entity.leftHit = true;
+            entity.rightHit = true;
+            return;
+        }
+
+
 
 
         if (gp.tileM.tile[topHitPos1].collision || gp.tileM.tile[topHitPos2].collision) {

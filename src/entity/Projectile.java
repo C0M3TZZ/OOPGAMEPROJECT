@@ -30,10 +30,16 @@ public class Projectile extends Entity{
 
     public void update() {
 
+        gp.cChecker.checkTile(this);
+
+        if (topHit || bottomHit || leftHit || rightHit) {
+            alive = false;
+        }
+
         if (user.equals(gp.player)) {
             int monsterHit = gp.cChecker.checkEntity(this, gp.monster);
             if (monsterHit != -1) {
-                gp.monster.get(monsterHit).life -= 1;
+                gp.monster.get(monsterHit).attacked(1);
                 System.out.println("Monster Health: " + gp.monster.get(monsterHit).life);
                 this.alive = false;
             }

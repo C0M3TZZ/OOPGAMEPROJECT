@@ -21,6 +21,8 @@ public class Entity {
     public boolean alive = true;
     public int life = 0;
     public int maxLife = 0;
+    boolean invincible = false;
+    int invincibleCounter = 0;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -29,6 +31,14 @@ public class Entity {
 
     public void setAction() {
 
+    }
+
+    public void attacked(int damage) {
+        if (!invincible) {
+            life -= damage;
+            invincible = true;
+            System.out.println("Turning invincible on");
+        }
     }
 
     public void update() {
@@ -41,6 +51,14 @@ public class Entity {
                 spriteNum = 0;
             }
             spriteCounter = 0;
+        }
+        if (invincible) {
+            invincibleCounter++;
+            if (invincibleCounter > 30) {
+                System.out.println("Turning invincible off");
+                invincible = false;
+                invincibleCounter = 0;
+            }
         }
         gp.cChecker.checkTile(this);
         if (life <= 0) {

@@ -97,6 +97,15 @@ public class Player extends Entity {
         if (life <= 0) {
             return;
         }
+        if (invincible) {
+            invincibleCounter++;
+            if (invincibleCounter > 30) {
+                System.out.println("Turning invincible off");
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
+
         gp.cChecker.checkTile(this);
         int objectIndex = gp.cChecker.checkObject(this, true);
 
@@ -209,6 +218,9 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
         BufferedImage image = animationLoader.getAnimation(direction).get(spriteNum);
+        if (invincible) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        }
         if (direction.equals("left") || direction.equals("dashLeft")) {
             g2.drawImage(image, screenX + (gp.tileSize * 2), screenY, -gp.tileSize * 2, gp.tileSize * 2, null);
         } else {
