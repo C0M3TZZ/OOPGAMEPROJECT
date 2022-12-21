@@ -14,6 +14,7 @@ public class PY_BankSensei extends Player {
         super(gp);
         bigSword = new BigSword(gp);
         this.projectile = new OBJ_BookAtk(gp);
+        this.name = "Bank Sensei";
     }
 
     @Override

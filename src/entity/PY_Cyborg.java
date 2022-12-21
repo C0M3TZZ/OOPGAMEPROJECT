@@ -14,6 +14,7 @@ public class PY_Cyborg extends Player {
         super(gp);
         bigSword = new BigSword(gp);
         this.projectile = new OBJ_GunAtk(gp);
+        this.name = "Cyborg";
     }
 
     @Override

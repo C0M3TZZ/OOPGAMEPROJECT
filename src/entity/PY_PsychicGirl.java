@@ -13,6 +13,7 @@ public class PY_PsychicGirl extends Player {
         super(gp);
         bigSword = new BigSword(gp);
         this.projectile = new OBJ_MagicOrb(gp);
+        this.name = "Psychic Girl";
     }
 
     public void getPlayerImage() {

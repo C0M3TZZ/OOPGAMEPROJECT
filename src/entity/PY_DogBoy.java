@@ -12,6 +12,7 @@ public class PY_DogBoy extends Player {
     public PY_DogBoy(GamePanel gp) {
         super(gp);
         bigSword = new BigSword(gp);
+        this.name = "Wolf Boy";
     }
 
     public void getPlayerImage() {
