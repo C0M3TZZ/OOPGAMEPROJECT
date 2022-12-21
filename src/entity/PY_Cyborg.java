@@ -12,6 +12,7 @@ public class PY_Cyborg extends Player {
     public PY_Cyborg(GamePanel gp) {
         super(gp);
         bigSword = new BigSword(gp);
+        this.name = "Cyborg";
     }
 
     @Override

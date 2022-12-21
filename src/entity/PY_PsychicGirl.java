@@ -11,6 +11,7 @@ public class PY_PsychicGirl extends Player {
     public PY_PsychicGirl(GamePanel gp) {
         super(gp);
         bigSword = new BigSword(gp);
+        this.name = "Psychic Girl";
     }
 
     public void getPlayerImage() {

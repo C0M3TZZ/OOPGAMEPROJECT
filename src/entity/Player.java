@@ -22,11 +22,13 @@ public class Player extends Entity {
     BufferedImage image, shadow;
     public Projectile projectile;
     int attackCounter = 0;
+    public String name;
 
     public Player(GamePanel gp) {
         super(gp);
         this.keyH = gp.keyH;
         this.mouseH = gp.mouseH;
+
         try {
             this.shadow = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/shadow.png")));
         } catch (IOException e) {
@@ -54,7 +56,7 @@ public class Player extends Entity {
         worldY = gp.tileSize * 21;
         speed = 4;
         direction = "idle";
-        life = 15;
+        life = 5;
 
         projectile = new OBJ_SwordAtk(gp);
     }
@@ -64,6 +66,9 @@ public class Player extends Entity {
     public void touchObject(int index) {
         if (index != -1) {
             if (gp.obj[index].pickUpable) {
+                if (gp.obj[index].name.equals("Health Potion")) {
+                    this.life += 1;
+                }
                 pickUpItem(index);
             } else {
                 gp.obj[index].action();

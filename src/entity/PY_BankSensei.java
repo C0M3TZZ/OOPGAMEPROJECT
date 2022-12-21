@@ -12,6 +12,7 @@ public class PY_BankSensei extends Player {
     public PY_BankSensei(GamePanel gp) {
         super(gp);
         bigSword = new BigSword(gp);
+        this.name = "Bank Sensei";
     }
 
     @Override
