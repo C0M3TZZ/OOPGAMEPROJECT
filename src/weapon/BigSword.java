@@ -3,15 +3,10 @@ package weapon;
 import entity.Player;
 import main.AnimationLoader;
 import main.GamePanel;
-import main.KeyHandler;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class BigSword extends Weapon {
-    public BigSword(GamePanel gp, KeyHandler keyH) {
+    public BigSword(GamePanel gp) {
         this.gp = gp;
-        this.keyH = keyH;
         this.animationLoader = new AnimationLoader(gp);
 
         getWeaponImage();
@@ -34,13 +29,4 @@ public class BigSword extends Weapon {
         }
     }
 
-    @Override
-    public void draw(Graphics2D g2) {
-        BufferedImage image = animationLoader.getAnimation(gp.player.direction).get(gp.player.spriteNum);
-        if (gp.player.direction.equals("left") || gp.player.direction.equals("dashLeft")) {
-            g2.drawImage(image, gp.player.screenX + (gp.tileSize * 2), gp.player.screenY, -gp.tileSize * 2, gp.tileSize * 2, null);
-        } else {
-            g2.drawImage(image, gp.player.screenX, gp.player.screenY, gp.tileSize * 2, gp.tileSize * 2, null);
-        }
-    }
 }

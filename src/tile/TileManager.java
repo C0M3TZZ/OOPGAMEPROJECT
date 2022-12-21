@@ -15,7 +15,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tile = new Tile[65];
+        tile = new Tile[89];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage("/maps/map01_data.txt");
@@ -26,7 +26,7 @@ public class TileManager {
         try {
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            for (int i = 0; i < 77; i++) {
+            for (int i = 0; i < 89; i++) {
                 String line = br.readLine();
                 String data[] = line.split(" ");
                 tile[i] = new Tile();

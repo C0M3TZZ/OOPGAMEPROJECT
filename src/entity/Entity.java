@@ -10,11 +10,17 @@ public class Entity {
     public int worldX, worldY, speed;
     public String direction = "left";
     public int spriteCounter, spriteNum;
+    public int spriteCounterLimit = 8;
     public Rectangle solidAreaX, solidAreaY;
+    public int solidAreaXDefaultX, solidAreaXDefaultY;
+    public int solidAreaYDefaultX, solidAreaYDefaultY;
     public boolean topHit, bottomHit, leftHit, rightHit;
     public int screenX, screenY;
+    public boolean alive = true;
+    public int life = 0;
+    public int maxLife = 0;
     GamePanel gp;
-    AnimationLoader animationLoader;
+    public AnimationLoader animationLoader;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -43,17 +49,11 @@ public class Entity {
         BufferedImage image = animationLoader.getAnimation(this.direction).get(this.spriteNum);
         this.screenX = worldX - gp.player.worldX + gp.player.screenX;
         this.screenY = worldY - gp.player.worldY + gp.player.screenY;
-        switch (this.direction) {
-            case "right":
-                g2.drawImage(image, screenX + gp.tileSize * 2, screenY, -gp.tileSize * 2, gp.tileSize * 2, null);
-                break;
-            case "left":
-                g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
-                break;
+        if (direction.equals("left")) {
+            g2.drawImage(image, screenX + (gp.tileSize * 2), screenY, -gp.tileSize * 2, gp.tileSize * 2, null);
+        } else {
+            g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
         }
-        g2.setColor(Color.RED);
-        g2.draw(new Rectangle(this.screenX + this.solidAreaX.x, this.screenY + this.solidAreaX.y, this.solidAreaX.width, this.solidAreaX.height));
-        g2.setColor(Color.GREEN);
-        g2.draw(new Rectangle(this.screenX + this.solidAreaY.x, this.screenY + this.solidAreaY.y, this.solidAreaY.width, this.solidAreaY.height));
     }
+
 }

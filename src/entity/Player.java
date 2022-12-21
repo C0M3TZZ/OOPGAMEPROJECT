@@ -1,25 +1,45 @@
 package entity;
 
-import main.AnimationLoader;
 import main.GamePanel;
 import main.KeyHandler;
-import weapon.BigSword;
+import main.MouseHandler;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
-public abstract class Player extends Entity {
+public class Player extends Entity {
     KeyHandler keyH;
+    MouseHandler mouseH;
     public final int screenX, screenY;
-    public int dashingCounter;
     public boolean dashing;
+    public int dashingCounter;
+    public boolean ultimate, pressUltimate;
+    public long ultimateStart, ultimateEnd;
+    BufferedImage image, shadow;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
         this.keyH = keyH;
+        try {
+            this.shadow = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/shadow.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         this.screenX = (gp.screenWidth / 2) - gp.tileSize;
         this.screenY = (gp.screenHeight / 2) - gp.tileSize;
+
+        solidAreaX = new Rectangle(4 + 32 + 4 + 4, 8 + 56 + 28, 40, 48 - 28);
+        solidAreaY = new Rectangle(8 + 32 + 4 + 4, 4 + 56 + 28, 32, 48 - 28 + 4 + 4);
+
+        solidAreaXDefaultX = solidAreaX.x;
+        solidAreaXDefaultY = solidAreaX.y;
+
+        solidAreaYDefaultX = solidAreaY.x;
+        solidAreaYDefaultY = solidAreaY.y;
 
         setDefaultValues();
         getPlayerImage();
@@ -32,43 +52,83 @@ public abstract class Player extends Entity {
         direction = "idle";
     }
 
-    public abstract void getPlayerImage();
+    public void getPlayerImage() {
+
+    };
 
     public void update() {
         gp.cChecker.checkTile(this);
 
+        // ULTIMATE
+        if (keyH.xPressed) {
+            ultimate = true;
+            pressUltimate = true;
+            ultimateStart = System.currentTimeMillis();
+        }
+        if (ultimate) {
+            ultimateEnd = System.currentTimeMillis();
+            if ((ultimateEnd-ultimateStart)/1000 == 30) {
+                ultimate = false;
+            }
+        }
+
         // RUN
         if (keyH.upPressed) {
-            direction = "up";
-            if (!topHit) {
+            if (!ultimate) {
+                direction = "up";
+            }
+            else {
+                direction = "upUlti";
+            }
+            if (!topHit && !pressUltimate) {
                 worldY -= speed;
             }
         }
         if (keyH.downPressed) {
-            direction = "down";
-            if (!bottomHit) {
+            if (!ultimate) {
+                direction = "down";
+            }
+            else {
+                direction = "downUlti";
+            }
+            if (!bottomHit && !pressUltimate) {
                 worldY += speed;
             }
         }
         if (keyH.rightPressed) {
-            direction = "right";
-            if (!rightHit) {
+            if (!ultimate) {
+                direction = "right";
+            }
+            else {
+                direction = "rightUlti";
+            }
+            if (!rightHit && !pressUltimate) {
                 worldX += speed;
             }
         }
         if (keyH.leftPressed) {
-            direction = "left";
-            if (!leftHit) {
+            if (!ultimate) {
+                direction = "left";
+            }
+            else {
+                direction = "leftUlti";
+            }
+            if (!leftHit && !pressUltimate) {
                 worldX -= speed;
             }
         }
         if (!keyH.upPressed && !keyH.downPressed && !keyH.leftPressed && !keyH.rightPressed) {
-            direction = "idle";
+            if (!ultimate) {
+                direction = "idle";
+            }
+            else {
+                direction = "idleUlti";
+            }
         }
 
-        // DASH
         gp.cChecker.checkTile(this);
-        if (keyH.shiftPressed && direction != "idle") {
+        // DASH
+        if (keyH.shiftPressed && direction != "idle" && !pressUltimate) {
             if (dashingCounter == 0) {
                 spriteNum = 0;
             }
@@ -76,31 +136,49 @@ public abstract class Player extends Entity {
             dashing = true;
         }
         if (dashingCounter > 0 && dashingCounter <= 20) {
-            switch (direction) {
-                case "up":
+            if (direction.equals("up") || direction.equals("upUlti")) {
+                if (!ultimate) {
                     direction = "dashUp";
-                    if (!topHit) {
-                        worldY -= speed;
-                    }
-                    break;
-                case "down":
+                }
+                else {
+                    direction = "dashUpUlti";
+                }
+                if (!topHit) {
+                    worldY -= speed;
+                }
+            }
+            if (direction.equals("down") || direction.equals("downUlti")) {
+                if (!ultimate) {
                     direction = "dashDown";
-                    if (!bottomHit) {
-                        worldY += speed;
-                    }
-                    break;
-                case "left":
+                }
+                else {
+                    direction = "dashDownUlti";
+                }
+                if (!bottomHit) {
+                    worldY += speed;
+                }
+            }
+            if (direction.equals("left") || direction.equals("leftUlti")) {
+                if (!ultimate) {
                     direction = "dashLeft";
-                    if (!leftHit) {
-                        worldX -= speed;
-                    }
-                    break;
-                case "right":
+                }
+                else {
+                    direction = "dashLeftUlti";
+                }
+                if (!leftHit) {
+                    worldX -= speed;
+                }
+            }
+            if (direction.equals("right") || direction.equals("rightUlti")) {
+                if (!ultimate) {
                     direction = "dashRight";
-                    if (!rightHit) {
-                        worldX += speed;
-                    }
-                    break;
+                }
+                else {
+                    direction = "dashRightUlti";
+                }
+                if (!rightHit) {
+                    worldX += speed;
+                }
             }
         }
         if (!keyH.shiftPressed) {
@@ -112,12 +190,20 @@ public abstract class Player extends Entity {
             }
         }
 
+        // ULTIMATE
+        if (pressUltimate) {
+            direction = "pressUlti";
+            spriteCounterLimit = 5;
+        }
+
         // update animation
         spriteCounter++;
-        if (spriteCounter > 10) {
+        if (spriteCounter > spriteCounterLimit) {
             if (spriteNum != animationLoader.getAnimation(direction).size() - 1) {
                 spriteNum++;
             } else {
+                pressUltimate = false;
+                spriteCounterLimit = 10;
                 spriteNum = 0;
             }
             spriteCounter = 0;
@@ -125,16 +211,18 @@ public abstract class Player extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        BufferedImage image = animationLoader.getAnimation(direction).get(spriteNum);
-        if (direction.equals("left") || direction.equals("dashLeft")) {
+        image = animationLoader.getAnimation(direction).get(spriteNum);
+        if (direction.equals("left") || direction.equals("dashLeft") || direction.equals("leftUlti") || direction.equals("dashLeftUlti")) {
             g2.drawImage(image, screenX + (gp.tileSize * 2), screenY, -gp.tileSize * 2, gp.tileSize * 2, null);
         } else {
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
         }
+//        g2.drawImage(shadow, 0, 0, gp.screenWidth, gp.screenHeight, null);
 
         g2.setColor(Color.RED);
         g2.draw(new Rectangle(screenX + solidAreaY.x, screenY + solidAreaY.y, solidAreaY.width, solidAreaY.height));
         g2.setColor(Color.GREEN);
         g2.draw(new Rectangle(screenX + solidAreaX.x, screenY + solidAreaX.y, solidAreaX.width, solidAreaX.height));
+
     }
 }
