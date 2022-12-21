@@ -10,14 +10,17 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font GhastlyPixe;
+    public TitleScreen titleScreen;
     public PauseScreen pauseScreen;
     public DiedScreen diedScreen;
     public PlayerDetails playerDetails;
 
     public UI(GamePanel gp) {
         this.gp = gp;
+        titleScreen = new TitleScreen(gp);
         pauseScreen = new PauseScreen(gp);
         playerDetails = new PlayerDetails(gp);
+        diedScreen = new DiedScreen(gp);
         try {
             InputStream is = getClass().getResourceAsStream("/font/GhastlyPixe.ttf");
             GhastlyPixe = Font.createFont(Font.TRUETYPE_FONT, is);
@@ -34,10 +37,14 @@ public class UI {
         g2.setColor(Color.WHITE);
 
         GhastlyPixe = GhastlyPixe.deriveFont(Font.TRUETYPE_FONT, 50);
+        if (gp.gameState == gp.titleState) {
+            drawTitleScreen();
+        }
         if (gp.gameState == gp.pauseState) {
             drawPauseScreen();
         }
         if (gp.gameState == gp.dideState) {
+            GhastlyPixe = GhastlyPixe.deriveFont(Font.TRUETYPE_FONT, 150);
             drawDiedScreen();
         }
 
@@ -47,15 +54,14 @@ public class UI {
         }
     }
 
+    public void drawTitleScreen() { titleScreen.draw(g2); }
     public void drawPlayerDetails() {
         playerDetails.draw(g2);
     }
-
     public void drawPauseScreen() {
         pauseScreen.draw(g2);
     }
-
     public void drawDiedScreen() {
-        pauseScreen.draw(g2);
+        diedScreen.draw(g2);
     }
 }

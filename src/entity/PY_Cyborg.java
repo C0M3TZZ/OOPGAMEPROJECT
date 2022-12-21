@@ -3,6 +3,7 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 import main.MouseHandler;
+import object.OBJ_GunAtk;
 import weapon.BigSword;
 
 import java.awt.*;
@@ -12,6 +13,7 @@ public class PY_Cyborg extends Player {
     public PY_Cyborg(GamePanel gp) {
         super(gp);
         bigSword = new BigSword(gp);
+        this.projectile = new OBJ_GunAtk(gp);
         this.name = "Cyborg";
     }
 
@@ -52,7 +54,7 @@ public class PY_Cyborg extends Player {
         super.getDirection();
 
         // ULTIMATE
-        this.getUltimate();
+//        this.getUltimate();
 
         //DASHING
         super.getDashing();

@@ -31,6 +31,9 @@ public class MouseHandler implements MouseListener {
                         case "continue":
                             gp.gameState = gp.playState;
                             break;
+                        case "quit to menu":
+                            gp.gameState = gp.titleState;
+                            break;
                     }
                 }
             }

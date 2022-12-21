@@ -3,6 +3,7 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 import main.MouseHandler;
+import object.OBJ_BookAtk;
 import weapon.BigSword;
 
 import java.awt.*;
@@ -12,6 +13,7 @@ public class PY_BankSensei extends Player {
     public PY_BankSensei(GamePanel gp) {
         super(gp);
         bigSword = new BigSword(gp);
+        this.projectile = new OBJ_BookAtk(gp);
         this.name = "Bank Sensei";
     }
 
@@ -58,7 +60,7 @@ public class PY_BankSensei extends Player {
         }
 
         // ULTIMATE
-        this.getUltimate();
+//        this.getUltimate();
 
         //DASHING
         if (!ultimate) {

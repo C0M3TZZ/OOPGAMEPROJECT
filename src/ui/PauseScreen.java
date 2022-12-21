@@ -14,7 +14,6 @@ public class PauseScreen {
     public PauseScreen(GamePanel gp) {
         this.gp = gp;
         buttonNameArr.add("continue");
-        buttonNameArr.add("options");
         buttonNameArr.add("quit to menu");
         button = new Button(gp, buttonNameArr);
     }

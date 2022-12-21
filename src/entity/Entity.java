@@ -36,6 +36,8 @@ public class Entity {
     public void attacked(int damage) {
         if (!invincible) {
             life -= damage;
+            System.out.println("Life: " + life);
+            System.out.println("Attack: " + damage);
             invincible = true;
             System.out.println("Turning invincible on");
         }
@@ -62,8 +64,12 @@ public class Entity {
         }
         gp.cChecker.checkTile(this);
         if (life <= 0) {
-            alive = false;
+            onDeath();
         }
+    }
+
+    public void onDeath() {
+        alive = false;
     }
 
     public void draw(Graphics2D g2) {
@@ -76,10 +82,6 @@ public class Entity {
         } else {
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
         }
-        g2.setColor(Color.RED);
-        g2.draw(new Rectangle(this.screenX + this.solidAreaX.x, this.screenY + this.solidAreaX.y, this.solidAreaX.width, this.solidAreaX.height));
-        g2.setColor(Color.GREEN);
-        g2.draw(new Rectangle(this.screenX + this.solidAreaY.x, this.screenY + this.solidAreaY.y, this.solidAreaY.width, this.solidAreaY.height));
     }
 
 }

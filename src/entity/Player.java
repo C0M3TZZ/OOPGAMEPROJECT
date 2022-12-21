@@ -24,6 +24,8 @@ public class Player extends Entity {
     int attackCounter = 0;
     public String name;
 
+    public int attack = 1;
+
     public Player(GamePanel gp) {
         super(gp);
         this.keyH = gp.keyH;
@@ -56,7 +58,9 @@ public class Player extends Entity {
         worldY = gp.tileSize * 21;
         speed = 4;
         direction = "idle";
-        life = 5;
+        maxLife = 5;
+        life = maxLife;
+
 
         projectile = new OBJ_SwordAtk(gp);
     }
@@ -65,13 +69,11 @@ public class Player extends Entity {
 
     public void touchObject(int index) {
         if (index != -1) {
-            if (gp.obj[index].pickUpable) {
-                if (gp.obj[index].name.equals("Health Potion")) {
-                    this.life += 1;
-                }
+            if (gp.obj.get(index).pickUpable) {
+                gp.obj.get(index).action();
                 pickUpItem(index);
             } else {
-                gp.obj[index].action();
+                gp.obj.get(index).action();
                 System.out.println("You can't pick up this item");
             }
         }
@@ -79,8 +81,8 @@ public class Player extends Entity {
 
     public void pickUpItem(int index) {
         if (index != -1) {
-            gp.obj[index].action();
-            gp.obj[index] = null;
+            gp.obj.get(index).action();
+            gp.obj.set(index, null);
         }
     }
 
@@ -156,13 +158,23 @@ public class Player extends Entity {
             ultimate = true;
             pressUltimate = true;
             ultimateStart = System.currentTimeMillis();
+            useUlti();
         }
         if (ultimate) {
             ultimateEnd = System.currentTimeMillis();
             if ((ultimateEnd-ultimateStart)/1000 == 10) {
                 ultimate = false;
+                endUlti();
             }
         }
+    }
+
+    public void useUlti() {
+
+    }
+
+    public void endUlti() {
+
     }
 
     public void getDashing() {
@@ -246,14 +258,14 @@ public class Player extends Entity {
         int objectIndex = gp.cChecker.checkObject(this, true);
         touchObject(objectIndex);
 
-        if (mouseH.leftClick && !projectile.alive && attackCounter <= 0) {
+        if (mouseH.leftClick && !projectile.alive && attackCounter <= 0 && !dashing) {
             Point mousePos = gp.getMousePosition();
             if (mousePos != null) {
                 double mouseX = mousePos.getX();
                 double mouseY = mousePos.getY();
 
                 double angle = Math.atan2(mouseY - screenY, mouseX - screenX);
-                projectile.set(worldX, worldY, angle, direction, true, this);
+                projectile.set(worldX, worldY, angle, "idle", true, this);
                 attackCounter = 30;
 
                 gp.projectileList.add(projectile);
@@ -264,9 +276,9 @@ public class Player extends Entity {
         }
 
         // ULTIMATE
-        if (pressUltimate) {
-            direction = "pressUlti";
-        }
+//        if (pressUltimate) {
+//            direction = "pressUlti";
+//        }
 
         // update animation
         spriteCounter++;
@@ -296,11 +308,6 @@ public class Player extends Entity {
         } else {
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
         }
-
-        g2.setColor(Color.RED);
-        g2.draw(new Rectangle(screenX + solidAreaY.x, screenY + solidAreaY.y, solidAreaY.width, solidAreaY.height));
-        g2.setColor(Color.GREEN);
-        g2.draw(new Rectangle(screenX + solidAreaX.x, screenY + solidAreaX.y, solidAreaX.width, solidAreaX.height));
     }
 
     public void drawShadow(Graphics2D g2) {

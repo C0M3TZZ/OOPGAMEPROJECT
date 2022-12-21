@@ -1,6 +1,8 @@
 package entity;
 
 import main.GamePanel;
+import object.OBJ_MagicOrb;
+import object.OBJ_UltPG;
 import weapon.BigSword;
 
 import java.awt.*;;
@@ -11,6 +13,7 @@ public class PY_PsychicGirl extends Player {
     public PY_PsychicGirl(GamePanel gp) {
         super(gp);
         bigSword = new BigSword(gp);
+        this.projectile = new OBJ_MagicOrb(gp);
         this.name = "Psychic Girl";
     }
 
@@ -38,11 +41,13 @@ public class PY_PsychicGirl extends Player {
         if (keyH.xPressed && !pressUltimate) {
             spriteNum = 0;
             ultimate = true;
+            useUlti();
             pressUltimate = true;
         }
         if (ultimate) {
             if (!pressUltimate) {
                 ultimate = false;
+                endUlti();
                 direction = "idle";
             }
         }
@@ -53,7 +58,7 @@ public class PY_PsychicGirl extends Player {
         super.getDirection();
 
         // ULTIMATE
-        this.getUltimate();
+//        this.getUltimate();
 
         //DASHING
         super.getDashing();
@@ -113,6 +118,21 @@ public class PY_PsychicGirl extends Player {
             spriteCounter = 0;
         }
     }
+
+    public void useUlti() {
+        this.projectile = new OBJ_UltPG(gp);
+        this.projectile.speed = 0;
+        projectile.set(worldX, worldY, 0, "idle", true, this);
+        invincible = true;
+        gp.projectileList.add(projectile);
+    }
+
+    public void endUlti() {
+        this.projectile = new OBJ_MagicOrb(gp);
+        invincible = false;
+    }
+
+
 
     public void draw(Graphics2D g2) {
         image = animationLoader.getAnimation(direction).get(spriteNum);

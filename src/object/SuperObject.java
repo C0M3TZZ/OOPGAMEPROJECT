@@ -43,9 +43,6 @@ abstract public class SuperObject {
 
         image = animationLoader.getAnimation(animationName).get(spriteNum);
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-
-        g2.setColor(Color.RED);
-        g2.draw(new Rectangle(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height));
     }
 
     abstract public void action();

@@ -2,16 +2,18 @@ package entity;
 
 import main.AnimationLoader;
 import main.GamePanel;
+import object.OBJ_HealthPotion;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Monster extends Entity {
     public Monster(GamePanel gp) {
         super(gp);
 
         this.speed = 1;
-        this.maxLife = 1;
+        this.maxLife = 3;
         life = maxLife;
         this.solidAreaX = new Rectangle(4 + 20, 8 + 56 + 28, 40, 50 - 28);
 
@@ -33,6 +35,18 @@ public class Monster extends Entity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void onDeath() {
+        Random random = new Random();
+        int randomNum = random.nextInt(100);
+        if (randomNum < 10) {
+            OBJ_HealthPotion healthPotion = new OBJ_HealthPotion(gp);
+            healthPotion.worldX = worldX;
+            healthPotion.worldY = worldY;
+            gp.obj.add(healthPotion);
+        }
+        alive = false;
     }
 
     public void setAction() {

@@ -18,6 +18,8 @@ public class PlayerDetails {
     public void draw(Graphics2D g2) {
         g2.setColor(Color.WHITE);
         g2.drawString(gp.player.name, 25, 50);
+        g2.setColor(Color.WHITE);
+        g2.fillRect(25, 75, 125, 10);
         g2.setColor(Color.RED);
         g2.fillRect(25, 75, gp.player.life*25, 10);
     }

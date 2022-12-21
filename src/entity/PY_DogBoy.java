@@ -51,13 +51,21 @@ public class PY_DogBoy extends Player {
         super.getDirection();
 
         // ULTIMATE
-        super.getUltimate();
+//        super.getUltimate();
 
         //DASHING
         super.getDashing();
 
         // UPDATE
         super.update();
+    }
+
+    public void useUlti() {
+        this.projectile.attack = 3;
+    }
+
+    public void endUlti() {
+        this.projectile.attack = attack;
     }
 
     public void draw(Graphics2D g2) {
