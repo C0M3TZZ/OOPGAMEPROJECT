@@ -3,6 +3,7 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 import main.MouseHandler;
+import object.OBJ_SwordAtk;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -19,6 +20,8 @@ public class Player extends Entity {
     public boolean ultimate, pressUltimate;
     public long ultimateStart, ultimateEnd;
     BufferedImage image, shadow;
+    public Projectile projectile;
+    int attackCounter = 0;
 
     public Player(GamePanel gp) {
         super(gp);
@@ -51,9 +54,30 @@ public class Player extends Entity {
         worldY = gp.tileSize * 21;
         speed = 4;
         direction = "idle";
+        life = 15;
+
+        projectile = new OBJ_SwordAtk(gp);
     }
 
     public void getPlayerImage() {};
+
+    public void touchObject(int index) {
+        if (index != -1) {
+            if (gp.obj[index].pickUpable) {
+                pickUpItem(index);
+            } else {
+                gp.obj[index].action();
+                System.out.println("You can't pick up this item");
+            }
+        }
+    }
+
+    public void pickUpItem(int index) {
+        if (index != -1) {
+            gp.obj[index].action();
+            gp.obj[index] = null;
+        }
+    }
 
     public void getDirection() {
         gp.cChecker.checkTile(this);
@@ -202,6 +226,38 @@ public class Player extends Entity {
     }
 
     public void update() {
+        if (life <= 0) {
+            gp.gameState = gp.dideState;
+        }
+        if (invincible) {
+            invincibleCounter++;
+            if (invincibleCounter > 30) {
+                System.out.println("Turning invincible off");
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
+
+        int objectIndex = gp.cChecker.checkObject(this, true);
+        touchObject(objectIndex);
+
+        if (mouseH.leftClick && !projectile.alive && attackCounter <= 0) {
+            Point mousePos = gp.getMousePosition();
+            if (mousePos != null) {
+                double mouseX = mousePos.getX();
+                double mouseY = mousePos.getY();
+
+                double angle = Math.atan2(mouseY - screenY, mouseX - screenX);
+                projectile.set(worldX, worldY, angle, direction, true, this);
+                attackCounter = 30;
+
+                gp.projectileList.add(projectile);
+            }
+        }
+        if (attackCounter > 0) {
+            attackCounter--;
+        }
+
         // ULTIMATE
         if (pressUltimate) {
             direction = "pressUlti";
@@ -227,6 +283,9 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
         image = animationLoader.getAnimation(direction).get(spriteNum);
+        if (invincible) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        }
         if (direction.equals("left") || direction.equals("dashLeft") || direction.equals("leftUlti") || direction.equals("dashLeftUlti")) {
             g2.drawImage(image, screenX + (gp.tileSize * 2), screenY, -gp.tileSize * 2, gp.tileSize * 2, null);
         } else {
@@ -240,6 +299,7 @@ public class Player extends Entity {
     }
 
     public void drawShadow(Graphics2D g2) {
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         g2.drawImage(shadow, 0, 0, gp.screenWidth, gp.screenHeight, null);
     }
 }

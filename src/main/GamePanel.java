@@ -33,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new PY_DogBoy(this);
+    public MonsterSpawner monsterSpawner = new MonsterSpawner(this);
     public SuperObject obj[] = new SuperObject[2];
     public ArrayList<Entity> monster = new ArrayList<>();
     public ArrayList<Entity> projectileList = new ArrayList<>();
@@ -40,6 +41,8 @@ public class GamePanel extends JPanel implements Runnable {
     public int gameState;
     public final int playState = 1;
     public final int pauseState = 2;
+    public final int dideState = 3;
+    int spawnCounter = 0;
 
     public GamePanel() {
 
@@ -71,6 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setUpGame() {
         assetSetter.setObject();
+        monsterSpawner.spawnMonster();
         gameState = playState;
         getRandomPlayer();
     }
@@ -107,6 +111,13 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (gameState == playState) {
             player.update();
+
+            if (spawnCounter == 0) {
+                monsterSpawner.spawnMonster();
+                spawnCounter = 100;
+            } else {
+                spawnCounter--;
+            }
 
             for (int i = 0; i < monster.size(); i++) {
                 if (monster.get(i) != null) {

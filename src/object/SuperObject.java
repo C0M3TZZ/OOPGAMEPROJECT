@@ -6,15 +6,18 @@ import main.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class SuperObject {
-    GamePanel gp;
-    AnimationLoader animationLoader;
+abstract public class SuperObject {
     public BufferedImage image;
     public String name;
     public boolean collision = false;
     public int worldX, worldY;
+    public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+    public int solidAreaDefaultX = 0, solidAreaDefaultY = 0;
+    GamePanel gp;
+    AnimationLoader animationLoader;
     public int spriteCounter, spriteNum;
     String animationName;
+    public boolean pickUpable = false;
 
     public SuperObject(GamePanel gp) {
         this.gp = gp;
@@ -40,5 +43,10 @@ public class SuperObject {
 
         image = animationLoader.getAnimation(animationName).get(spriteNum);
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
+        g2.setColor(Color.RED);
+        g2.draw(new Rectangle(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height));
     }
+
+    abstract public void action();
 }

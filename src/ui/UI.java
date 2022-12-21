@@ -11,6 +11,7 @@ public class UI {
     Graphics2D g2;
     Font GhastlyPixe;
     public PauseScreen pauseScreen;
+    public DiedScreen diedScreen;
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -36,9 +37,16 @@ public class UI {
         if (gp.gameState == gp.pauseState) {
             drawPauseScreen();
         }
+        if (gp.gameState == gp.dideState) {
+            drawDiedScreen();
+        }
     }
 
     public void drawPauseScreen() {
+        pauseScreen.draw(g2);
+    }
+
+    public void drawDiedScreen() {
         pauseScreen.draw(g2);
     }
 }

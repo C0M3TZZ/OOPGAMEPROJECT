@@ -63,6 +63,9 @@ public class PY_Cyborg extends Player {
     public void draw(Graphics2D g2) {
         image = animationLoader.getAnimation(direction).get(spriteNum);
 
+        if (invincible) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        }
         if (direction.equals("upUlti") || direction.equals("downUlti") || direction.equals("leftUlti") || direction.equals("rightUlti") || direction.equals("idleUlti")) {
             g2.drawImage(image, screenX - gp.tileSize, screenY - gp.tileSize, gp.tileSize * 2 * 2, gp.tileSize * 2 * 2, null);
         } else {

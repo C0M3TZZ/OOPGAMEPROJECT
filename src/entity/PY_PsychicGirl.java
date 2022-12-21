@@ -57,6 +57,38 @@ public class PY_PsychicGirl extends Player {
         //DASHING
         super.getDashing();
 
+        if (life <= 0) {
+            gp.gameState = gp.dideState;
+        }
+        if (invincible) {
+            invincibleCounter++;
+            if (invincibleCounter > 30) {
+                System.out.println("Turning invincible off");
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
+
+        int objectIndex = gp.cChecker.checkObject(this, true);
+        touchObject(objectIndex);
+
+        if (mouseH.leftClick && !projectile.alive && attackCounter <= 0) {
+            Point mousePos = gp.getMousePosition();
+            if (mousePos != null) {
+                double mouseX = mousePos.getX();
+                double mouseY = mousePos.getY();
+
+                double angle = Math.atan2(mouseY - screenY, mouseX - screenX);
+                projectile.set(worldX, worldY, angle, direction, true, this);
+                attackCounter = 30;
+
+                gp.projectileList.add(projectile);
+            }
+        }
+        if (attackCounter > 0) {
+            attackCounter--;
+        }
+
         // UPDATE
         if (pressUltimate) {
             direction = "pressUlti";
@@ -84,6 +116,9 @@ public class PY_PsychicGirl extends Player {
     public void draw(Graphics2D g2) {
         image = animationLoader.getAnimation(direction).get(spriteNum);
 
+        if (invincible) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        }
         if (direction.equals("pressUlti")) {
             g2.drawImage(image, screenX - gp.tileSize, screenY - gp.tileSize * 2, gp.tileSize * 2 * 2, gp.tileSize * 2 * 2, null);
         } else {

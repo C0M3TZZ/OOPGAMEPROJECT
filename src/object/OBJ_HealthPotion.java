@@ -8,6 +8,11 @@ public class OBJ_HealthPotion extends SuperObject {
         getImage();
     }
 
+    @Override
+    public void action() {
+
+    }
+
     public void getImage() {
         try {
             animationLoader.LoadAnimation("objects/healthPotion.png", 0, 3, "healthPotion");
