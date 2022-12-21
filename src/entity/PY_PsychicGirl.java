@@ -58,7 +58,7 @@ public class PY_PsychicGirl extends Player {
         super.getDirection();
 
         // ULTIMATE
-        this.getUltimate();
+//        this.getUltimate();
 
         //DASHING
         super.getDashing();

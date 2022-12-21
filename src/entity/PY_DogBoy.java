@@ -51,7 +51,7 @@ public class PY_DogBoy extends Player {
         super.getDirection();
 
         // ULTIMATE
-        super.getUltimate();
+//        super.getUltimate();
 
         //DASHING
         super.getDashing();

@@ -58,7 +58,9 @@ public class Player extends Entity {
         worldY = gp.tileSize * 21;
         speed = 4;
         direction = "idle";
-        life = 5;
+        maxLife = 5;
+        life = maxLife;
+
 
         projectile = new OBJ_SwordAtk(gp);
     }
@@ -67,13 +69,11 @@ public class Player extends Entity {
 
     public void touchObject(int index) {
         if (index != -1) {
-            if (gp.obj[index].pickUpable) {
-                if (gp.obj[index].name.equals("Health Potion")) {
-                    this.life += 1;
-                }
+            if (gp.obj.get(index).pickUpable) {
+                gp.obj.get(index).action();
                 pickUpItem(index);
             } else {
-                gp.obj[index].action();
+                gp.obj.get(index).action();
                 System.out.println("You can't pick up this item");
             }
         }
@@ -81,8 +81,8 @@ public class Player extends Entity {
 
     public void pickUpItem(int index) {
         if (index != -1) {
-            gp.obj[index].action();
-            gp.obj[index] = null;
+            gp.obj.get(index).action();
+            gp.obj.set(index, null);
         }
     }
 
@@ -276,9 +276,9 @@ public class Player extends Entity {
         }
 
         // ULTIMATE
-        if (pressUltimate) {
-            direction = "pressUlti";
-        }
+//        if (pressUltimate) {
+//            direction = "pressUlti";
+//        }
 
         // update animation
         spriteCounter++;

@@ -12,7 +12,11 @@ public class OBJ_HealthPotion extends SuperObject {
 
     @Override
     public void action() {
-
+        if ((gp.player.life += 1) > gp.player.maxLife) {
+            gp.player.life = gp.player.maxLife;
+        } else {
+            gp.player.life += 1;
+        }
     }
 
     public void getImage() {

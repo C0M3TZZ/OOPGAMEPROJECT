@@ -54,7 +54,7 @@ public class PY_Cyborg extends Player {
         super.getDirection();
 
         // ULTIMATE
-        this.getUltimate();
+//        this.getUltimate();
 
         //DASHING
         super.getDashing();

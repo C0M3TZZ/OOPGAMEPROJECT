@@ -60,7 +60,7 @@ public class PY_BankSensei extends Player {
         }
 
         // ULTIMATE
-        this.getUltimate();
+//        this.getUltimate();
 
         //DASHING
         if (!ultimate) {

@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new PY_DogBoy(this);
     public MonsterSpawner monsterSpawner = new MonsterSpawner(this);
-    public SuperObject obj[] = new SuperObject[2];
+    public ArrayList<SuperObject> obj = new ArrayList<>();
     public ArrayList<Entity> monster = new ArrayList<>();
     public ArrayList<Entity> projectileList = new ArrayList<>();
     public UI ui = new UI(this);
@@ -61,13 +61,13 @@ public class GamePanel extends JPanel implements Runnable {
                 player = new PY_PsychicGirl(this);
                 break;
             case 2:
-                player = new PY_PsychicGirl(this);
+                player = new PY_DogBoy(this);
                 break;
             case 3:
-                player = new PY_PsychicGirl(this);
+                player = new PY_Cyborg(this);
                 break;
             case 4:
-                player = new PY_PsychicGirl(this);
+                player = new PY_BankSensei(this);
                 break;
         }
     }
@@ -141,9 +141,9 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            for (int i = 0; i < obj.length; i++) {
-                if (obj[i] != null) {
-                    obj[i].update();
+            for (int i = 0; i < obj.size(); i++) {
+                if (obj.get(i) != null) {
+                    obj.get(i).update();
                 }
             }
         }
@@ -155,9 +155,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileM.draw(g2);
 
-        for (int i = 0; i < obj.length; i++) {
-            if (obj[i] != null) {
-                obj[i].draw(g2, this, "healthPotion");
+        for (int i = 0; i < obj.size(); i++) {
+            if (obj.get(i) != null) {
+                obj.get(i).draw(g2, this, "healthPotion");
             }
         }
 
