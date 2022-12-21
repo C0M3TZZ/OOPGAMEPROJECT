@@ -26,12 +26,12 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
     TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler(this);
-    MouseHandler mouseH = new MouseHandler(this);
+    public KeyHandler keyH = new KeyHandler(this);
+    public MouseHandler mouseH = new MouseHandler(this);
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
-    public Player player = new PY_DogBoy(this, keyH);
+    public Player player = new PY_DogBoy(this);
     public SuperObject obj[] = new SuperObject[2];
     public ArrayList<Entity> projectileList = new ArrayList<>();
     public UI ui = new UI(this);
@@ -59,16 +59,16 @@ public class GamePanel extends JPanel implements Runnable {
         int randomPlayer = ThreadLocalRandom.current().nextInt(1, 5);
         switch (randomPlayer) {
             case 1:
-                player = new PY_DogBoy(this, keyH);
+                player = new PY_DogBoy(this);
                 break;
             case 2:
-                player = new PY_DogBoy(this, keyH);
+                player = new PY_DogBoy(this);
                 break;
             case 3:
-                player = new PY_DogBoy(this, keyH);
+                player = new PY_DogBoy(this);
                 break;
             case 4:
-                player = new PY_DogBoy(this, keyH);
+                player = new PY_DogBoy(this);
                 break;
         }
     }

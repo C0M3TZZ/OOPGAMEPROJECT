@@ -20,9 +20,10 @@ public class Player extends Entity {
     public long ultimateStart, ultimateEnd;
     BufferedImage image, shadow;
 
-    public Player(GamePanel gp, KeyHandler keyH) {
+    public Player(GamePanel gp) {
         super(gp);
-        this.keyH = keyH;
+        this.keyH = gp.keyH;
+        this.mouseH = gp.mouseH;
         try {
             this.shadow = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/shadow.png")));
         } catch (IOException e) {

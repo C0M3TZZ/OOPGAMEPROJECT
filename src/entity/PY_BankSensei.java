@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class PY_BankSensei extends Player {
     BigSword bigSword;
-    public PY_BankSensei(GamePanel gp, KeyHandler keyH) {
-        super(gp, keyH);
+    public PY_BankSensei(GamePanel gp) {
+        super(gp);
         bigSword = new BigSword(gp);
     }
 

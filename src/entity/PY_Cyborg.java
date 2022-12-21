@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class PY_Cyborg extends Player {
     BigSword bigSword;
-    public PY_Cyborg(GamePanel gp, KeyHandler keyH) {
-        super(gp, keyH);
+    public PY_Cyborg(GamePanel gp) {
+        super(gp);
         bigSword = new BigSword(gp);
     }
 

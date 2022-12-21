@@ -10,8 +10,8 @@ import java.awt.*;;
 public class PY_PsychicGirl extends Player {
     BigSword bigSword;
 
-    public PY_PsychicGirl(GamePanel gp, KeyHandler keyH) {
-        super(gp, keyH);
+    public PY_PsychicGirl(GamePanel gp) {
+        super(gp);
         bigSword = new BigSword(gp);
     }
 

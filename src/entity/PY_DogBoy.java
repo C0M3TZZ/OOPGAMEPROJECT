@@ -8,8 +8,8 @@ import java.awt.*;;
 
 public class PY_DogBoy extends Player {
     BigSword bigSword;
-    public PY_DogBoy(GamePanel gp, KeyHandler keyH) {
-        super(gp, keyH);
+    public PY_DogBoy(GamePanel gp) {
+        super(gp);
         bigSword = new BigSword(gp);
     }
 
