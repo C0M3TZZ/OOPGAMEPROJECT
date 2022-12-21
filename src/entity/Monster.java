@@ -12,7 +12,14 @@ public class Monster extends Entity {
 
         this.speed = 1;
         this.solidAreaX = new Rectangle(4 + 20, 8 + 56 + 28, 40, 50 - 28);
+
+        this.solidAreaXDefaultX = solidAreaX.x;
+        this.solidAreaXDefaultY = solidAreaX.y;
+
         this.solidAreaY = new Rectangle(8 + 20, 5 + 56 + 28, 32, 55 - 28);
+
+        this.solidAreaYDefaultX = solidAreaY.x;
+        this.solidAreaYDefaultY = solidAreaY.y;
 
         getMonsterImage();
     }

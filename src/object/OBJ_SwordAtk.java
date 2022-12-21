@@ -4,6 +4,8 @@ import entity.Projectile;
 import main.AnimationLoader;
 import main.GamePanel;
 
+import java.awt.*;
+
 public class OBJ_SwordAtk extends Projectile {
 
     GamePanel gp;
@@ -15,6 +17,8 @@ public class OBJ_SwordAtk extends Projectile {
         this.speed = 10;
         this.maxLife = 10;
         this.alive = false;
+        this.solidAreaX = new Rectangle(0, 0, 64, 64);
+        this.solidAreaY = new Rectangle(0, 0, 64, 64);
         getImage();
     }
 

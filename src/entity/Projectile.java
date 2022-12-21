@@ -29,6 +29,13 @@ public class Projectile extends Entity{
     }
 
     public void update() {
+
+        if (user.equals(gp.player)) {
+            int monsterHit = gp.cChecker.checkEntity(this, gp.monster);
+            if (monsterHit != -1) {
+                this.alive = false;
+            }
+        }
         worldX += Math.cos(angle) * speed;
         worldY += Math.sin(angle) * speed;
 
@@ -50,7 +57,7 @@ public class Projectile extends Entity{
     }
 
     public void draw(Graphics2D g2) {
-        BufferedImage image = animationLoader.getAnimation(this.direction).get(this.spriteNum);
+        BufferedImage image = animationLoader.getAnimation("down").get(this.spriteNum);
 
         this.screenX = worldX - gp.player.worldX + gp.player.screenX;
         this.screenY = worldY - gp.player.worldY + gp.player.screenY;
@@ -62,6 +69,10 @@ public class Projectile extends Entity{
         g.drawImage(image, null, 0, 0);
         g.dispose();
         g2.drawImage(rotatedImage, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
+        g2.setColor(Color.RED);
+        g2.draw(new Rectangle(this.screenX + this.solidAreaX.x, this.screenY + this.solidAreaX.y, this.solidAreaX.width, this.solidAreaX.height));
+        g2.setColor(Color.GREEN);
+        g2.draw(new Rectangle(this.screenX + this.solidAreaY.x, this.screenY + this.solidAreaY.y, this.solidAreaY.width, this.solidAreaY.height));
     }
 
 }

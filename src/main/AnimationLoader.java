@@ -19,11 +19,15 @@ public class AnimationLoader {
     }
 
     public void LoadAnimation(String path, int start, int end, String name) {
+        this.LoadAnimation(path, start, end, name, gp.tileSize);
+    }
+
+    public void LoadAnimation(String path, int start, int end, String name, int tileSize) {
         try {
             System.out.println("Loading animation: " + name + " from " + path);
             BufferedImage spriteSheet = ImageIO.read(getClass().getClassLoader().getResourceAsStream(path));
             for (int i = start; i <= end; i++) {
-                BufferedImage image = spriteSheet.getSubimage(i * gp.tileSize, 0, gp.tileSize, gp.tileSize);
+                BufferedImage image = spriteSheet.getSubimage(i * tileSize, 0, tileSize, tileSize);
                 if (animationMap.containsKey(name)) {
                     animationMap.get(name).add(image);
                 } else {

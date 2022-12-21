@@ -175,12 +175,11 @@ public class Player extends Entity {
             if (mousePos != null) {
                 double mouseX = mousePos.getX();
                 double mouseY = mousePos.getY();
-                System.out.println("Mouse X: " + mouseX + " Mouse Y: " + mouseY);
+
                 double angle = Math.atan2(mouseY - screenY, mouseX - screenX);
                 projectile.set(worldX, worldY, angle, direction, true, this);
 
                 gp.projectileList.add(projectile);
-                System.out.println("shot");
             }
         }
 

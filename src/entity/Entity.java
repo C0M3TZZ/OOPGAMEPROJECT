@@ -54,9 +54,9 @@ public class Entity {
         } else {
             g2.drawImage(image, screenX, screenY, gp.tileSize * 2, gp.tileSize * 2, null);
         }
-//        g2.setColor(Color.RED);
-//        g2.draw(new Rectangle(this.screenX + this.solidAreaX.x, this.screenY + this.solidAreaX.y, this.solidAreaX.width, this.solidAreaX.height));
-//        g2.setColor(Color.GREEN);
-//        g2.draw(new Rectangle(this.screenX + this.solidAreaY.x, this.screenY + this.solidAreaY.y, this.solidAreaY.width, this.solidAreaY.height));
+        g2.setColor(Color.RED);
+        g2.draw(new Rectangle(this.screenX + this.solidAreaX.x, this.screenY + this.solidAreaX.y, this.solidAreaX.width, this.solidAreaX.height));
+        g2.setColor(Color.GREEN);
+        g2.draw(new Rectangle(this.screenX + this.solidAreaY.x, this.screenY + this.solidAreaY.y, this.solidAreaY.width, this.solidAreaY.height));
     }
 }
