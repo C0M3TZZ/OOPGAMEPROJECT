@@ -41,7 +41,6 @@ public class MonsterSpawner {
 
         gp.cChecker.checkTile(monster);
         if (monster.topHit || monster.bottomHit || monster.leftHit || monster.rightHit) {
-            spawnMonster();
         } else {
             gp.monster.add(monster);
         }
