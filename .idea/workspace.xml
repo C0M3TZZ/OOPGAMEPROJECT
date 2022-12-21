@@ -5,6 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16aff991-6ba1-43d5-be88-4d4ecbe2c8f6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/entity/Entity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/entity/Entity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/entity/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/entity/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/main/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOPGAMEPROJECT/main/GamePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Projectile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/CollisionChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GamePanel.java" afterDir="false" />
     </list>

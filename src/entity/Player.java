@@ -21,10 +21,14 @@ public class Player extends Entity {
     public boolean dashing;
     public Projectile projectile;
 
+    int attackCounter = 0;
+
     public Player(GamePanel gp, KeyHandler keyH, MouseHandler mouseH) {
         super(gp);
         this.keyH = keyH;
         this.mouseH = mouseH;
+        this.maxLife = 10;
+        this.life = this.maxLife;
         this.animationLoader = new AnimationLoader(gp);
         bigSword = new BigSword(gp, keyH);
 
@@ -90,6 +94,9 @@ public class Player extends Entity {
     }
 
     public void update() {
+        if (life <= 0) {
+            return;
+        }
         gp.cChecker.checkTile(this);
         int objectIndex = gp.cChecker.checkObject(this, true);
 
@@ -170,7 +177,7 @@ public class Player extends Entity {
             }
         }
 
-        if (mouseH.leftClick && !projectile.alive) {
+        if (mouseH.leftClick && !projectile.alive && attackCounter <= 0) {
             Point mousePos = gp.getMousePosition();
             if (mousePos != null) {
                 double mouseX = mousePos.getX();
@@ -178,9 +185,13 @@ public class Player extends Entity {
 
                 double angle = Math.atan2(mouseY - screenY, mouseX - screenX);
                 projectile.set(worldX, worldY, angle, direction, true, this);
+                attackCounter = 30;
 
                 gp.projectileList.add(projectile);
             }
+        }
+        if (attackCounter > 0) {
+            attackCounter--;
         }
 
         // update animation

@@ -33,6 +33,8 @@ public class Projectile extends Entity{
         if (user.equals(gp.player)) {
             int monsterHit = gp.cChecker.checkEntity(this, gp.monster);
             if (monsterHit != -1) {
+                gp.monster.get(monsterHit).life -= 1;
+                System.out.println("Monster Health: " + gp.monster.get(monsterHit).life);
                 this.alive = false;
             }
         }
@@ -46,7 +48,7 @@ public class Projectile extends Entity{
 
         spriteCounter++;
         if (spriteCounter > 10) {
-            if (spriteNum != animationLoader.getAnimation(direction).size() - 1) {
+            if (spriteNum != animationLoader.getAnimation("down").size() - 1) {
                 spriteNum++;
             } else {
                 spriteNum = 0;

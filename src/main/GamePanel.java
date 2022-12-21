@@ -33,9 +33,11 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH, mouseH);
+    public MonsterSpawner monsterSpawner = new MonsterSpawner(this);
     public SuperObject obj[] = new SuperObject[10];
     public ArrayList<Entity> monster = new ArrayList<>();
     public ArrayList<Entity> projectileList = new ArrayList<>();
+    int spawnCounter = 0;
 
     public GamePanel() {
 
@@ -49,7 +51,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setUpGame() {
         assetSetter.setObject();
-        assetSetter.setMonster();
+        monsterSpawner.spawnMonster();
+//        assetSetter.setMonster();
     }
 
     public void startGameThread() {
@@ -83,6 +86,14 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
 
         player.update();
+
+        if (spawnCounter == 0) {
+            monsterSpawner.spawnMonster();
+            spawnCounter = 100;
+        } else {
+            spawnCounter--;
+        }
+
         for (int i = 0; i < monster.size(); i++) {
             if (monster.get(i) != null) {
                 if(monster.get(i).alive) {

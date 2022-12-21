@@ -43,6 +43,9 @@ public class Entity {
             spriteCounter = 0;
         }
         gp.cChecker.checkTile(this);
+        if (life <= 0) {
+            alive = false;
+        }
     }
 
     public void draw(Graphics2D g2) {

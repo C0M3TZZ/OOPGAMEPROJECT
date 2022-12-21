@@ -206,4 +206,66 @@ public class CollisionChecker {
         }
         return index;
     }
+
+    public boolean checkPlayer(Entity entity, Entity player) {
+        boolean index = false;
+
+        entity.solidAreaX.x = entity.worldX + entity.solidAreaX.x;
+        entity.solidAreaX.y = entity.worldY + entity.solidAreaX.y;
+
+        entity.solidAreaY.x = entity.worldX + entity.solidAreaY.x;
+        entity.solidAreaY.y = entity.worldY + entity.solidAreaY.y;
+
+        player.solidAreaX.x = player.worldX + player.solidAreaX.x;
+        player.solidAreaX.y = player.worldY + player.solidAreaX.y;
+
+        if (entity.direction.equals("up")) {
+            entity.solidAreaX.y -= entity.speed;
+            entity.solidAreaY.y -= entity.speed;
+            if (entity.solidAreaX.intersects(player.solidAreaX) || entity.solidAreaY.intersects(player.solidAreaX)) {
+                index = true;
+            }
+        }
+
+        if (entity.direction.equals("down")) {
+            entity.solidAreaX.y += entity.speed;
+            entity.solidAreaY.y += entity.speed;
+            if (entity.solidAreaX.intersects(player.solidAreaX) || entity.solidAreaY.intersects(player.solidAreaX)) {
+                index = true;
+            }
+        }
+
+        if (entity.direction.equals("left")) {
+            entity.solidAreaX.x -= entity.speed;
+            entity.solidAreaY.x -= entity.speed;
+            if (entity.solidAreaX.intersects(player.solidAreaX) || entity.solidAreaY.intersects(player.solidAreaX)) {
+                index = true;
+            }
+        }
+
+        if (entity.direction.equals("right")) {
+            entity.solidAreaX.x += entity.speed;
+            entity.solidAreaY.x += entity.speed;
+            if (entity.solidAreaX.intersects(player.solidAreaX) || entity.solidAreaY.intersects(player.solidAreaX)) {
+                index = true;
+            }
+        }
+
+        if (entity.direction.equals("idle")) {
+            if (entity.solidAreaX.intersects(player.solidAreaX) || entity.solidAreaY.intersects(player.solidAreaX)) {
+                index = true;
+            }
+        }
+
+        entity.solidAreaX.x = entity.solidAreaXDefaultX;
+        entity.solidAreaX.y = entity.solidAreaXDefaultY;
+        entity.solidAreaY.x = entity.solidAreaYDefaultX;
+        entity.solidAreaY.y = entity.solidAreaYDefaultY;
+
+        player.solidAreaX.x = player.solidAreaXDefaultX;
+        player.solidAreaX.y = player.solidAreaXDefaultY;
+
+        return index;
+
+    }
 }
